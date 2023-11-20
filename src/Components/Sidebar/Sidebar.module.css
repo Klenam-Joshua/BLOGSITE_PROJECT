@@ -1,0 +1,27 @@
+.sidbar{
+   width:270px;
+   position:absolute;
+   top:0;
+   left:0;
+   bottom:0;
+   overflow-y:visible;
+   background-color: var(--sidebar-color);
+   padding:1rem 2rem;
+}
+
+.logo_container img{
+     width:4rem;
+     height:4rem;
+     filter: invert(70%);
+}
+
+.menu_icon_con{
+
+}
+.menu_icon{
+    color:white;
+    width:2rem;
+    height:2rem;
+    padding-top:1rem;
+    cursor:pointer;
+}
