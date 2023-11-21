@@ -1,0 +1,39 @@
+.navLink__list{
+     list-style: none;
+     margin:0.4rem 0;
+
+}
+
+.navLink__list a{
+    display:flex;
+    width:100%;
+    align-items: center;
+    color:white;
+    gap:2rem;
+    font-size:1.7rem;
+    font-family: var(--font-red-poppins);
+    text-decoration: none;
+    padding: 0.6rem 0.2rem  0.6rem 1.2rem;
+    border-radius:5px;
+    
+ 
+}
+
+.navLink__list a:hover{
+    background: var(--sidebar-link-hover);
+
+}
+
+.active_link{
+    background: var(--sidebar-link-hover);
+    display: none;
+}
+
+
+
+
+.navLink__list a span:nth-child(1){
+    margin-top:0.5rem;
+
+}
+

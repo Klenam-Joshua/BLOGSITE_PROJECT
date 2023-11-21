@@ -1,0 +1,77 @@
+.page_header{
+    background:white;
+   display:flex;
+   justify-content: space-between;
+   padding:1.3rem 2rem;
+
+}
+
+.header_section_1 span{
+    display: inline-block;
+    margin:0.4rem  1rem;
+    font-size:2rem;
+    color:var(--sidebar-link-hover);
+    cursor:pointer;
+    width:4.3rem;
+    height:4.3rem;
+    border-radius: 50%;
+  
+    transition: 0.4s all;
+    text-align: center;
+    padding-top: 0.6rem;
+}
+
+.header_section_1 span:hover{
+    background:rgb(244, 240, 240);
+    
+}
+
+.header_icon{
+    width:2.5rem;
+    height: 2.5rem;
+}
+
+
+
+/* header right section */
+.header_section_2 {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.header_section_2 span{
+    display: inline-block;
+    margin:0.4rem  0.5rem;
+    font-size:2rem;
+    color:var(--sidebar-link-hover);
+    cursor:pointer;
+    width:4.3rem;
+    height:4.3rem;
+    border-radius: 50%;
+  
+    transition: 0.4s all;
+    text-align: center;
+    padding-top: 0.6rem;
+   
+}
+
+.user_profile_logout {
+    display: flex;
+    align-items: center;
+    margin-right:3rem;
+    cursor: pointer;
+    padding:0.3rem 4rem;
+    border-radius: 10px;
+    justify-content: space-between;
+    gap:1rem;
+  
+}
+
+.user_profile_logout:hover{
+    background-color:var(--bg-main)
+}
+.user_avatar_con  img{
+    width:3rem;
+    height: 3rem;
+    border-radius: 50%;
+}

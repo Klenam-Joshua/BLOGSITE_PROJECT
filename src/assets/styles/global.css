@@ -3,7 +3,7 @@
 :root{
 --font-red-hat: 'Red Hat Display', sans-serif;
 --font-poppins:'Poppins', sans-serif;
---font-robot: 'Roboto', sans-serif;
+--font-roboto: 'Roboto', sans-serif;
 
 --bg-main:#f0f5f8;
 --sidebar-color:#0b212a;
@@ -13,6 +13,13 @@
 html{
     font-size: 65%;
     background-color: var(--bg-main);
+    font-family:var(--font-poppins) ;
+}
+
+body , *{
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
 }
   
 
@@ -53,4 +60,34 @@ html{
 
 .align-center {
     align-items: center;
+}
+
+
+/* ============ TEXT ALIGNMENT */
+
+
+
+.text-light {
+    color: var(--vLightGray);
+}
+
+.text-red {
+    color: red;
+}
+
+.text_line-through {
+    text-decoration: line-through;
+}
+
+/* text alignment */
+.text_align_justify {
+    text-align: justify;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
 }
