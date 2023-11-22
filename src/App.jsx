@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes , Route, BrowserRouter } from 'react-ro
 
 import "./assets/styles/global.css"
 
+
 // components
 
 import Sidebar from './Components/Sidebar/Sidebar'
@@ -12,17 +13,27 @@ import Sidebar from './Components/Sidebar/Sidebar'
 //pages
 import Comments from './pages/Comments/Comments'
 import Posts from './pages/Posts/Posts'
+import Login from './pages/Login/Login'
+
+
+//context
+import SettingsContextProvider from './Context/SettingsContext'
 
 const App = () => {
   return (
      <Router> 
-
-     <Sidebar>
-           <Routes>
-                  <Route path='posts' element={<Posts/>} />
-                     <Route  path ="/comments"  element={<Comments/>}/>
-           </Routes>
-     </Sidebar>
+          <SettingsContextProvider>
+                 <Routes>
+                     <Route path='/login' element={<Login/>} /> 
+                 </Routes>
+          <Sidebar>
+              <Routes>
+                    
+                       <Route path='/' element={<Posts/>} />
+                       <Route  path ="/comments"  element={<Comments/>}/>
+                </Routes>
+              </Sidebar>
+          </SettingsContextProvider>
      
      </Router>
   )

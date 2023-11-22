@@ -18,7 +18,7 @@ const Links = [
     {
         name:"Posts",
         icon:<FaBook/>,
-        route:"/posts"
+        route:"/"
     },
 
     {
@@ -29,19 +29,19 @@ const Links = [
     },
     
     {
-        name:"comments",
+        name:"Comments",
         icon:<MdModeComment/>,
         route:"/comments"
 
     },
     {
-        name:"chats",
+        name:"Chats",
         icon:<IoChatbubbles/>,
         route:"/chats"
 
     },
     {
-        name:"settings",
+        name:"Settings",
         icon:<IoMdSettings/>,
         route:"/settings"
 

@@ -23,12 +23,35 @@ import styles from "./Header.module.css";
 import ExitModal from "../ExitModal/ExitModal";
 
 
+//icons
+
+import    {FiMenu}  from  "react-icons/fi"
+
+//============== custom hooks ========
+import { useSettinsContext } from "../../Hooks/useSettingsContext";
+
+
+
+
+
+
 const Header = ({}) => {
+
+
+ const {dispatch, sidebarIsOpen} = useSettinsContext();
+ 
+
 
     const [openProfile, setOpenProfile] = useState(false)
   return (
-          <header  className={styles.page_header}>
+
+          <header  className={sidebarIsOpen ? styles.page_header : `${styles.page_header} ${styles.page_header_full}`}>
                  <div className={styles.header_section_1}>
+                       <span 
+                         onClick={()=>dispatch({type:"OPEN_SIDEBAR"})}
+                        className={`${styles.header_icon} ${styles.navbar_menuIcon}`}  id={styles.navbar__menuIcon} >
+                           <FiMenu className={styles.menu_icon}/>
+                       </span>
                         <span >
                                <MdOutlineChatBubbleOutline className={styles.header_icon}/>
                         </span>

@@ -39,7 +39,7 @@ const ExitModal = () => {
                 <ul>
                   {
                    profile_links.map((link,id)=>(
-                           <li>
+                           <li key={link + id}>
                                 <Link to={link.location} >
                                      <span>
                                          {link.icon}

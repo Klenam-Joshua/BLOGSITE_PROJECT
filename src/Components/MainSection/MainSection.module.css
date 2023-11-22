@@ -2,4 +2,11 @@
     width:calc(100% - 270px);
     margin-left: 270px;
     margin-top:0;
+    transition:0.3s;
+}
+
+.main_section_full{
+    width: calc(100% - 7rem);
+    margin-left:7rem;
+    transition:0.3s;
 }

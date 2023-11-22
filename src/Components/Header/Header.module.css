@@ -26,6 +26,10 @@
     
 }
 
+
+.header_section_1 span:nth-child(1){
+    display: none ;
+}
 .header_icon{
     width:2.5rem;
     height: 2.5rem;
@@ -74,4 +78,24 @@
     width:3rem;
     height: 3rem;
     border-radius: 50%;
+}
+
+
+
+.page_header_full{
+    /* width: 100%;
+    margin-left: 0; */
+}
+.page_header_full .header_section_1 span:nth-child(1){
+    display:inline-block;
+}
+
+
+ 
+@media (max-width:808px) {
+    
+ .header_section_1 span:nth-child(1){
+    display:inline-block;
+}
+
 }

@@ -1,33 +1,51 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
 //--------css -------
 import   styles from "./Sidebar.module.css"
 
-// images
+//  ==================  images =============
 import Logo from "../../assets/images/Logo.png"
 import avatar from "../../assets/images/avatar.png"
 
-// icons
+
+//  ===============  icons ============ 
 import { FiMenu } from "react-icons/fi";
 
 
-// components
+
+// ==================== components ===============
 import MenuList from '../MenuList/MenuList';
 
 
 
+
+//===================== custom Hooks ==========
+ import { useSettinsContext } from '../../Hooks/useSettingsContext';
+
+
 const Sidebar = ({children}) => {
+
+    const {dispatch, sidebarIsOpen} = useSettinsContext();
+
+  
+
+
+
+
   return (
         <>
-             <aside  id='sidbar'  className={styles.sidebar} >
+             <aside  id='sidbar'  className={sidebarIsOpen ? styles.sidebar : `${styles.sidebar}  ${styles.view}` } >
               <div className="row  justify-between">
                     <div id="logo_container"  className={styles.logo_container}>
                            <img src={Logo} alt="brand_logo" />
                     </div>
-
-                    <div className={styles.menu_icon_con}>                     
-                          <FiMenu className={styles.menu_icon}/>
+                             
+                    <div 
+                    className={styles.menu_icon_con}>                     
+                           <span  onClick={()=>dispatch({type:"OPEN_SIDEBAR"})}>
+                              <FiMenu className={styles.menu_icon}/>
+                           </span>
                     </div>
               </div>
          
@@ -43,9 +61,7 @@ const Sidebar = ({children}) => {
                                </div>
                                 <h3>
                                           Klenam                             
-                                </h3>
-
-                                     
+                                </h3>                               
 
                      </div>
 
@@ -56,7 +72,7 @@ const Sidebar = ({children}) => {
 
               <nav  className={styles.menu_container}>
                  <Link  to="/create-blog"   className={styles.new_blog_btn} id='new_blog_btn'> 
-                     create new blog  
+                     Create new blog  
                   </Link> 
                                   
                     <MenuList/>

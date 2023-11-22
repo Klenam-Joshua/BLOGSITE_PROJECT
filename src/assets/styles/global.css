@@ -91,3 +91,31 @@ body , *{
 .text-right {
     text-align: right;
 }
+
+/* 
+.view{
+    left:-270px ;
+  }
+ */
+
+/*  responsive */   
+
+@media (max-width:808px) {
+      aside{
+
+        left:-270px ;
+        
+        
+      }
+     
+
+      #navbar__menuIcon{
+        display: inline-block;
+      }
+
+    header,   #main_container{
+        width:100%;
+        margin-left:0;
+     
+      }
+}
