@@ -14,12 +14,17 @@ html{
     font-size: 65%;
     background-color: var(--bg-main);
     font-family:var(--font-poppins) ;
+    height: 100%;
 }
 
 body , *{
     box-sizing: border-box;
     margin:0;
     padding:0;
+
+}
+body{
+    height: 100%;
 }
   
 
@@ -28,7 +33,9 @@ body , *{
  =============  FLEX STYLES =======
 */
 
-
+#root{
+    height: 100%;
+}
 
 .row {
     display: flex;

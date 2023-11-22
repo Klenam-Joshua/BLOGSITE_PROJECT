@@ -1,9 +1,9 @@
 .forms_wrapper{
-    width:80%;
-    margin:50% auto auto auto;
-    transform:translateY(-50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height:100%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+    background:white;
+
 }
 

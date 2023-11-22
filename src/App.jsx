@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes , Route, BrowserRouter } from 'react-router-dom'
+import { BrowserRouter as Router, Routes , Route, BrowserRouter, Navigate } from 'react-router-dom'
 
 //======css ======
 
@@ -20,20 +20,25 @@ import Login from './pages/Login/Login'
 import SettingsContextProvider from './Context/SettingsContext'
 
 const App = () => {
+   let user = false;
   return (
      <Router> 
+       
+
+         
           <SettingsContextProvider>
-                 <Routes>
-                     <Route path='/login' element={<Login/>} /> 
-                 </Routes>
-          <Sidebar>
+          {user && <Sidebar />}
+
               <Routes>
-                    
-                       <Route path='/' element={<Posts/>} />
-                       <Route  path ="/comments"  element={<Comments/>}/>
+                       <Route path='/login' element={user ? <Navigate to="/"/> : <Login />  }/>
+                       <Route path='/' element={ !user?  <Navigate to="/login"/> : <Posts/>} />
+                       <Route  path ="/comments"  element={!user ?  <Navigate to="/login"/> : <Comments/>}/>
+                       
                 </Routes>
-              </Sidebar>
-          </SettingsContextProvider>
+                </SettingsContextProvider>
+           
+           
+        
      
      </Router>
   )

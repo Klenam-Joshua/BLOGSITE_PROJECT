@@ -1,6 +1,6 @@
 import styles from "./formsWrapper.module.css";
 
-const formsWrapper = ({children}) => {
+const FormsWrapper = ({children}) => {
   return (
     <div  className={styles.forms_wrapper}>
           {children}
@@ -8,4 +8,4 @@ const formsWrapper = ({children}) => {
   )
 }
 
-export default formsWrapper
+export default FormsWrapper
