@@ -1,8 +1,15 @@
 .page_header{
+    position: fixed;
     background:white;
    display:flex;
    justify-content: space-between;
-   padding:0 2rem;
+   padding:0.8rem 2rem;
+   margin-bottom: 4rem;
+ width:calc(100% - 270px);
+ transition:0.3s;
+ box-shadow: 4px 0 17px  rgb(201, 198, 198);
+
+ left:270px;
 
 }
 
@@ -83,8 +90,10 @@
 
 
 .page_header_full{
-    /* width: 100%;
-    margin-left: 0; */
+    width: calc(100% - 7rem);
+     left: 7rem;
+     transition:0.3s;
+    
 }
 .page_header_full .header_section_1 span:nth-child(1){
     display:inline-block;
@@ -93,6 +102,17 @@
 
  
 @media (max-width:808px) {
+    .page_header{
+        width: 100%;
+        left: 0;
+    }
+    
+.page_header_full{
+    width: 100%;
+     left:0;
+     transition:0.3s;
+    
+}
     
  .header_section_1 span:nth-child(1){
     display:inline-block;

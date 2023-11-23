@@ -29,6 +29,9 @@ import    {FiMenu}  from  "react-icons/fi"
 
 //============== custom hooks ========
 import { useSettinsContext } from "../../Hooks/useSettingsContext";
+import { useAuthContext } from "../../Hooks/useAuthContext";
+import { useLogout } from "../../Hooks/useLogout";
+
 
 
 
@@ -39,7 +42,11 @@ const Header = ({}) => {
 
 
  const {dispatch, sidebarIsOpen} = useSettinsContext();
+ const {user} = useAuthContext()
  
+ 
+
+
 
 
     const [openProfile, setOpenProfile] = useState(false)
@@ -78,7 +85,7 @@ const Header = ({}) => {
                              }}
                             className={styles.user_profile_logout}>
                                         <div className="user_name_role">
-                                            <h3>Joshua</h3>
+                                            <h3>{user.email.split("@")[0]}</h3>
                                             <h5>admin</h5>
                                         </div>
                                         <div className={styles.user_avatar_con}>

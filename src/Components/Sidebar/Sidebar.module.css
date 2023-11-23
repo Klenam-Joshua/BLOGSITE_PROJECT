@@ -1,6 +1,7 @@
 .sidebar{
    width:270px;
-   position:absolute;
+   position:fixed;
+   z-index: 99888899;
    top:0;
    left:0;
    bottom:0;
@@ -97,7 +98,7 @@
 .view{
     left:0 ;
     width:7rem;
-
+   z-index: 988889999;
     transition:0.3s;
   }
 
@@ -134,6 +135,7 @@
 @media (max-width:808px) {
     .sidebar{
       left:-270px ;
+      z-index: 898989898;
         
     }
    

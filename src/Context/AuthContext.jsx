@@ -1,13 +1,14 @@
 import { createContext, useEffect, useReducer } from "react"
 import { projectAuth } from "../firebase/firebase";
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 const AuthContextProvider = ({children}) => {
 
     const authReducer = (state, action)=>{
                 switch (action.type) {
                     case "LOGIN": 
+                    console.log(action.payload)
                        return {...state,user:action.payload}
                     case "LOGOUT": 
                         return {...state,user:null}
@@ -31,7 +32,7 @@ const [credentials, dispatch] = useReducer(authReducer,{
 // get user when the page loads
 useEffect(()=>{
         projectAuth.onAuthStateChanged((user)=>{
-            dispatch({type:"AUTH_IS_READY",payload:user})
+           dispatch({type:"AUTH_IS_READY",payload:user})
         })
 },[])
 

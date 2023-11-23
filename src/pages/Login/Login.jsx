@@ -1,10 +1,16 @@
 import styles from "./Login.module.css";
+import { useState } from "react";
 
 //images
 import Logo from "../../assets/images/logo.png"
 // ======== other components========
 import FormsWrapper from "../../Components/formsWrapper/formsWrapper";
-import { useState } from "react";
+
+import LoadingAnim from "../../Components/LoadingAnim/LoadingAnim";
+
+//  custom hooks
+import  {useLogin} from "../../Hooks/useLogin";
+
 
 
 export default function Login() {
@@ -12,13 +18,20 @@ export default function Login() {
     const [userEmail, setUserEmail] = useState("");
     const [userPassword, setUserPassword] = useState("");
 
+    const {isLoading, error, loginUser}  = useLogin()
 
-const handleSubmit = (e)=>{
+
+const handleLogin = (e)=>{
     e.preventDefault();
     const data = {
-         userEmail,
-         userPassword
+        email: userEmail,
+        password: userPassword
      }
+
+     loginUser(data)
+     
+
+
    
   
 }
@@ -30,7 +43,8 @@ const handleSubmit = (e)=>{
                                <img src={Logo} alt="brandLogo" />
                          </div>
                           <h2 className="text-center">Sign in</h2>
-           <form  onSubmit={handleSubmit}>
+           <form  onSubmit={handleLogin}>
+                  {error && <p className="text-center" style={{color:"red", marginTop:"1rem", fontSize:"1.3rem"}}> {error}</p>}
                  <div className={styles.field_wrapper}>
                          <fieldset>
                                <legend> email *</legend>
@@ -51,7 +65,7 @@ const handleSubmit = (e)=>{
                  </div>
              <a href="#"  > Forgot password?</a>
                  <button type="submit">
-                      Login
+                      {isLoading ? <LoadingAnim/> : "Login" }
                  </button>
            </form>
     </div>

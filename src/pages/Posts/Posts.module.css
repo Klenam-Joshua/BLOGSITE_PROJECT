@@ -1,0 +1,30 @@
+.posts_wrapper{
+    width:90%;
+    margin:auto;
+}
+
+.search_field_wrapper{
+    width:80%;
+    margin:auto;
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+}
+
+.search_field_wrapper form{
+    width: 100%;
+}
+.search_field_wrapper input{
+    padding:1.5rem 2rem;
+    border-radius: 4rem;;
+
+    display: inline-block;
+}
+.search_field_wrapper input:focus{
+    box-shadow: 0 0 10px rgb(203, 199, 199);
+}
+.search_field_wrapper input + span{
+    display: none;
+}
+
+

@@ -17,30 +17,34 @@ import Login from './pages/Login/Login'
 
 
 //context
-import SettingsContextProvider from './Context/SettingsContext'
+import { useAuthContext } from './Hooks/useAuthContext'
+import CreatePost from './pages/CreatePost/CreatePost'
+
 
 const App = () => {
-   let user = false;
+   const {user,authIsReady} = useAuthContext()
   return (
+   <>
+   {! authIsReady && <p>loading application</p> }
      <Router> 
-       
 
-         
-          <SettingsContextProvider>
           {user && <Sidebar />}
-
+              {
+               authIsReady &&
               <Routes>
+                       <Route path="/create-post"  element={!user ?<Navigate to="/login"/> :<CreatePost/>} />
                        <Route path='/login' element={user ? <Navigate to="/"/> : <Login />  }/>
                        <Route path='/' element={ !user?  <Navigate to="/login"/> : <Posts/>} />
                        <Route  path ="/comments"  element={!user ?  <Navigate to="/login"/> : <Comments/>}/>
                        
                 </Routes>
-                </SettingsContextProvider>
+               
            
-           
+              }
         
      
      </Router>
+     </>
   )
 }
 

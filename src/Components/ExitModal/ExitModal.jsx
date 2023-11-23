@@ -10,8 +10,24 @@ import { MdExitToApp } from "react-icons/md";
 
 import styles from "./ExitModal.module.css"
 
+// ====== custom hook ==========
+
+import { useLogout } from "../../Hooks/useLogout";
+
 
 const ExitModal = () => {
+
+    const {logoutUser}  = useLogout()
+
+
+
+ const handleLogout = ()=>{
+       logoutUser()
+ }
+
+
+
+
 
     
     const profile_links = [
@@ -25,11 +41,7 @@ const ExitModal = () => {
             name:"comments",
            location:"/comments",
         },
-        {
-            icon:<MdExitToApp/>,
-            name:"Sign out",
-            location:"/Sign-out",
-        }
+
     ]
 
   return (
@@ -39,7 +51,9 @@ const ExitModal = () => {
                 <ul>
                   {
                    profile_links.map((link,id)=>(
-                           <li key={link + id}>
+                           <li key={link + id}
+                         
+                           >
                                 <Link to={link.location} >
                                      <span>
                                          {link.icon}
@@ -50,8 +64,21 @@ const ExitModal = () => {
                                </Link>
                                
                            </li>
+                           
                    ))
                   }
+                  
+
+                  <li    onClick={handleLogout}>
+                  <Link to="#" >
+                                     <span>
+                                         <MdExitToApp/>
+                                     </span>
+                                    <span>
+                                       Logout
+                                    </span>
+                               </Link>
+                  </li>
                 </ul>
         </div>
   )

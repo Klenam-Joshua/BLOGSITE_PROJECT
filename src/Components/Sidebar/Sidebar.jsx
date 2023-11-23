@@ -71,7 +71,7 @@ const Sidebar = ({children}) => {
               {/* ======= navLink ==== */}
 
               <nav  className={styles.menu_container}>
-                 <Link  to="/create-blog"   className={styles.new_blog_btn} id='new_blog_btn'> 
+                 <Link  to="/create-post"   className={styles.new_blog_btn} id='new_blog_btn'> 
                      Create new blog  
                   </Link> 
                                   

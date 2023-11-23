@@ -1,0 +1,19 @@
+.rotating-div {
+    width: 2.1vw;
+    height: 2.1vw;
+    border: 0.2vw solid white;
+    border-top-color: transparent;
+    margin: auto;
+    border-radius: 50%;
+
+    animation: rotate 1s infinite linear;
+
+}
+
+
+@keyframes rotate {
+    to {
+        transform: rotate(360deg);
+
+    }
+}
