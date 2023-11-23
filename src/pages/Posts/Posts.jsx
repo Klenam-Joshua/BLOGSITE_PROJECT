@@ -14,7 +14,7 @@ import { useCollection } from "../../Hooks/useCollection";
 
 const Posts = () => {
 
-  const {isLoading, error, posts} = useCollection()
+  //const {isLoading, error, posts} = useCollection()
 
 
 

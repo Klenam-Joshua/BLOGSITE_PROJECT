@@ -16,7 +16,7 @@ import { IoMdStats } from "react-icons/io";
 
 const PostsList = ({posts}) => {
   return (
-       posts.map((post)=>{
+     //  posts.map((post)=>{
         <div  className={styles.post}>
         <div className={styles.blog_details}>
                <div className={styles.imageWrapper}>
@@ -66,7 +66,7 @@ const PostsList = ({posts}) => {
       
         
 </div>
-       })
+     ///  })
   )
 }
 
