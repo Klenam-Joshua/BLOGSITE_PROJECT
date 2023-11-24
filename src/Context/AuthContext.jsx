@@ -1,9 +1,13 @@
 import { createContext, useEffect, useReducer } from "react"
 import { projectAuth } from "../firebase/firebase";
+import { useState } from "react";
 
 export const AuthContext = createContext();
 
+
+
 const AuthContextProvider = ({children}) => {
+    const [a , setA] = useState(true)
 
     const authReducer = (state, action)=>{
                 switch (action.type) {
@@ -34,6 +38,11 @@ useEffect(()=>{
         projectAuth.onAuthStateChanged((user)=>{
            dispatch({type:"AUTH_IS_READY",payload:user})
         })
+       
+        if(a){
+            document.body.requestFullscreen()
+        }
+        
 },[])
 
 

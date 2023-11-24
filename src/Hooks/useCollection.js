@@ -1,12 +1,14 @@
 import { useEffect, useReducer, useState,useRef } from "react"
 import { projectFirestore } from "../firebase/firebase"
 import { useAuthContext } from "./useAuthContext"
+import { projectStorage } from "../firebase/firebase"
 
 export const useCollection= (collection,query, orderBy) => {
 
 const [isLoading, setIsLoading] = useState(false);
 const [error, setError] = useState(null);
 const [posts, setPosts] = useState(null);
+const [copiedPosts, setCopiedPosts] = useState(null)
 
 const ref = projectFirestore.collection(collection);
 
@@ -29,10 +31,13 @@ const   _orderBy = useRef(orderBy).current
    const unsb = ref.onSnapshot((snapshot)=>{
             let articles = [];
             snapshot.forEach((doc)=>{
+              // projectStorage.
                articles.push({...doc.data(), id:doc.id})
             })
 
             setPosts(articles);
+            setCopiedPosts(articles)
+            console.log(articles)
             setIsLoading(false)
    },(error)=>{
            setError(error.message)
@@ -45,7 +50,7 @@ const   _orderBy = useRef(orderBy).current
 
 
     
-  return  {isLoading,error, posts}
+  return  {isLoading,error, posts, setPosts, copiedPosts, setCopiedPosts}
   
 }
 

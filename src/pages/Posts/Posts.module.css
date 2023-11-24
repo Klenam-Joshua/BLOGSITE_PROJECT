@@ -28,3 +28,22 @@
 }
 
 
+.emptyPost{
+     text-align: center;
+     margin-top:4rem;
+     font-size:2rem;
+}
+
+
+
+.loadingAnim_con{
+    margin-top:4rem;
+}
+.loadingAnim_con > div{
+    width:5rem;
+    height: 5rem;
+    border-color:var(--sidebar-color);
+    border-top-color:transparent;
+    
+    
+}

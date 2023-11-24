@@ -9,6 +9,13 @@
     cursor:pointer;
     flex-wrap: wrap;
 }
+
+.postIcon{
+    font-size:3rem;
+    font-weight: 700;
+    border:1px solid;
+    padding: 1rem 1.6rem;
+}
 .post:hover{
     border:none;
     box-shadow: 0 0 10px  rgb(179, 178, 178);

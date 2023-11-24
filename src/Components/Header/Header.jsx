@@ -3,10 +3,11 @@ import { MdModeComment } from "react-icons/md";
 import { FaUsers } from "react-icons/fa6";
 import { RiFontSize } from "react-icons/ri";
 import { MdOutlineZoomOutMap } from "react-icons/md"
+
 import { IoIosNotifications } from "react-icons/io";
 import { MdOutlineChatBubbleOutline } from "react-icons/md";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
 
@@ -21,6 +22,7 @@ import styles from "./Header.module.css";
 //other components
 
 import ExitModal from "../ExitModal/ExitModal";
+import ChatModal from "../ChatModal/ChatModal";
 
 
 //icons
@@ -50,6 +52,18 @@ const Header = ({}) => {
 
 
     const [openProfile, setOpenProfile] = useState(false)
+    const [fullScreen, setFullScreen] = useState(false)
+
+
+    useEffect(()=>{
+         if(fullScreen){
+              document.body.requestFullscreen()
+         }   
+         if(!fullScreen){
+              document.exitFullscreen()
+         }
+         
+    },[fullScreen])
   return (
 
           <header  className={sidebarIsOpen ? styles.page_header : `${styles.page_header} ${styles.page_header_full}`}>
@@ -71,7 +85,9 @@ const Header = ({}) => {
                               <span className={styles.font_icon}>
                                      <RiFontSize/>
                                </span>
-                             <span className={styles.zoom_icon}>
+                             <span
+                              onClick={e=>setFullScreen(!fullScreen)}
+                             className={styles.zoom_icon}>
                                     <MdOutlineZoomOutMap/> 
                               </span>
                              <span  className={styles.notification_icon}>
@@ -92,6 +108,7 @@ const Header = ({}) => {
                                                <img src={avatar} alt="user_avatar" />
                                         </div>
                                         {/*username and user image  */}
+                                        
                             </div>
                             {
                                openProfile &&
@@ -99,6 +116,13 @@ const Header = ({}) => {
                             
                             }
                  </div>
+
+{/* ======= chat modal here
+
+
+
+*/}
+<ChatModal/>
           </header>
   )
 }

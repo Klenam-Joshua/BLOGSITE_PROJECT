@@ -1,3 +1,6 @@
+import { useNavigate } from "react-router-dom";
+
+
 import styles from "./PostsList.module.css";
 
 
@@ -15,20 +18,37 @@ import { IoMdStats } from "react-icons/io";
 
 
 const PostsList = ({posts}) => {
+  const navigate = useNavigate()
+
+       const handleClick = (url)=>{
+                    navigate(`create-post${url}`)
+       }
+
+
+
   return (
-     //  posts.map((post)=>{
-        <div  className={styles.post}>
+       posts.map((post)=>(
+        <div
+       onClick={
+            ()=>  handleClick(`?id=${post.id}`)
+       }
+          className={styles.post}>
         <div className={styles.blog_details}>
                <div className={styles.imageWrapper}>
-                      <img src={postImage} alt="post_image" />
+                     {post.postImageUrl ?  <img src={post.postImageUrl} alt="post_image" />
+                     :
+                     <p  className={styles.postIcon}>
+                         { post.postTitle && post.postTitle[0].toUpperCase()}
+                     </p>
+              }
                </div>
                <div className={styles.blog_title_date}>
                        <h2>
-                           Ai revolution
+                         {post.postTitle}
                             {/* {blog.title} */}
                        </h2>
                        <p>
-                           Published . Nov 2 2023
+                           Published . {new Date(post.createdAt.seconds  * 1000).toDateString()}
                            {/* Published . {post.timestamp} */}
                        </p>
                </div>
@@ -38,9 +58,14 @@ const PostsList = ({posts}) => {
         {/* second section */}
         <div className={styles.author_details}>
                       <div className={styles.author_profile}>
-                             <h2>J K Klenam</h2>
+                             <h2>{post.authorName}</h2>
                               <div className={styles.author_image}>
-                               <    img src={avatar} alt="author image" />
+                              {post.authorImage ?  
+                                 <    img src={post.authorImage} alt="author image" />
+                              :
+                              <    img src={avatar} alt="author image" />
+                            
+                            }
                               </div>
                       </div>
                       <div className={styles.blog_stats}>
@@ -66,7 +91,7 @@ const PostsList = ({posts}) => {
       
         
 </div>
-     ///  })
+       ))
   )
 }
 

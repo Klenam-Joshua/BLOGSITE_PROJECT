@@ -15,12 +15,21 @@ html{
     background-color: var(--bg-main);
     font-family:var(--font-poppins) ;
     height: 100%;
+    zoom:100%;
+}
+
+:fullscreen html{
+     background:var(--bg-main)
+}
+body{
+    background:var(--bg-main)
 }
 
 body , *{
     box-sizing: border-box;
     margin:0;
     padding:0;
+   
 
 }
 body{

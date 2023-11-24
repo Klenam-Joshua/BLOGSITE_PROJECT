@@ -5,35 +5,80 @@ import MainSection from "../../Components/MainSection/MainSection"
 
 //icons 
 import { FaImage } from "react-icons/fa";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
+
+// ========= context ======
+import { useAuthContext } from "../../Hooks/useAuthContext";
+import { useCreate } from "../../Hooks/useCreatePost";
 
 
 
 
 const CreatePost = () => {
-    
-const post = useRef();
+    const [imageUrl, setImageUrl]  = useState(null);
+    const [ postContent, setPostContent] = useState(null);
+    const [postTitle, setPostTitle] = useState("");
+    const {user}  = useAuthContext();
+    const post = useRef();
+
+    const {createPost, success, isLoading} = useCreate("posts")
+
+
+
+
 const handleSubmit = (e)=>{
-    console.log(post.current.innerHTML)
-    e.preventDefault();
+
+  e.preventDefault();
+  setPostContent(post.current.innerHTML)
+
+  const doc = {
+          authorName:user.email.split()[0],
+          author_id: user.uid,
+          content:postContent,
+          postTitle:postTitle
+
+  }
+  
+  createPost(doc,imageUrl)
+
+
 }
 
   return (
       <MainSection>
 
-            <div className={styles.post_form_container}>
+            <div 
+             
+            className={styles.post_form_container}>
+                 
             <form encType="multipart/form-data"  onSubmit={handleSubmit}>
+
                         <div className={styles.title_bar_wrapper}>
+                        {
+                success
+                 &&
+                  <p  style={{color:"green", textAlign:"center", fontSize:"1.4rem"}}>
+                       post created successfully
+                  </p>
+               }
                         <div className={styles.wrapper}>
+                      
+                      {/*checks if submit is successful  */}
+                      
+                   
             <div className={styles.title_field_con}>
-                   <input type="text" id=""  placeholder="title"/>
+                   <input
+                   onChange={e=>setPostTitle(e.target.value)}
+                   type="text" id="postTitle"  placeholder="title"/>
             </div>
               <div className={styles.file_selector_con}>
                     <label htmlFor="file_selector"  className="text-center">
                               <FaImage/>
                     </label>
-                     <input style={{display:"none"}} type="file" id="file_selector"/>
+                     <input
+                     onChange={e=>setImageUrl(e.target.files[0])}
+                      style={{display:"none"}} type="file" id="file_selector"/>
               </div>
 
             <button type="submit">
@@ -44,10 +89,18 @@ const handleSubmit = (e)=>{
           
                <div className={styles.textarea_con}>
                 
-               <div  ref={post} contentEditable={true} className={styles.textbox}
+               <div  ref={post} contentEditable={true} 
+               suppressContentEditableWarning={true}
+               className={styles.textbox}
                  
                 >
 
+                  {
+                    imageUrl && <img
+                    draggable="true"
+                     src={URL.createObjectURL(imageUrl)} alt="blogImageUrl" />
+                  }
+                   
                  </div>
                </div>
             </form>
