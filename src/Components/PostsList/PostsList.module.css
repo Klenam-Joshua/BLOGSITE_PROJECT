@@ -1,69 +1,76 @@
-.post{
+.post {
     display: flex;
     justify-content: space-between;
-    background:white;
-    margin-top:2rem;
-    padding:1rem 2.2rem;
-    border:1px solid rgb(216, 211, 211);
+    background: white;
+    margin-top: 2rem;
+    padding: 1rem 2.2rem;
+    border: 1px solid rgb(216, 211, 211);
     border-radius: 5px;
-    cursor:pointer;
+    cursor: pointer;
     flex-wrap: wrap;
 }
 
-.postIcon{
-    font-size:3rem;
+.postIcon {
+    font-size: 3rem;
     font-weight: 700;
-    border:1px solid;
+    border: 1px solid;
     padding: 1rem 1.6rem;
 }
-.post:hover{
-    border:none;
-    box-shadow: 0 0 10px  rgb(179, 178, 178);
+
+.post:hover {
+    border: none;
+    box-shadow: 0 0 10px rgb(179, 178, 178);
 }
 
-.post .blog_details{
+.post .blog_details {
     display: flex;
     align-items: center;
-    gap:2rem;
+    gap: 2rem;
 }
 
-.imageWrapper img{
-    width:4rem;
-    height: 4rem;;
+.imageWrapper img {
+    width: 4rem;
+    height: 4rem;
+    ;
 }
-.blog_title_date h2{
-   margin-bottom: 1.5rem;
+
+.blog_title_date h2 {
+    margin-bottom: 1.5rem;
 }
-.blog_title_date p{
-    font-size:1.3rem;
+
+.blog_title_date p {
+    font-size: 1.3rem;
 }
 
 
-.author_details .author_profile{
+.author_details .author_profile {
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
 }
 
-.author_details .author_profile img{
-   width:3rem;
-   height: 3rem;
-   border-radius: 50%;
+.author_details .author_profile img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
 }
 
-.blog_stats{
+.blog_stats {
     display: flex;
     justify-content: center;
-    gap:2rem
-    
+    gap: 2rem
 }
 
-.blog_stats div span{
-font-size: 1.4rem;
+.blog_stats div span {
+    font-size: 1.4rem;
 }
 
-.counts{
-    margin-right:1rem;
+.counts {
+    margin-right: 1rem;
     margin-bottom: 1rem;
     display: inline-block;
+}
+
+.deleteIcon {
+    font-size: 2rem;
 }

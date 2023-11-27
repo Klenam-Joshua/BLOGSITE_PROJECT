@@ -1,0 +1,47 @@
+::backdrop {
+
+    background: rgb(0, 0, 0, 0.2);
+
+
+}
+
+.dialogBox {
+    border-radius: 1rem;
+    padding: 1.7rem 2.5rem;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    outline: none;
+
+}
+
+.dialogBox p {
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 1rem;
+}
+
+.dialogBox span {
+    display: block;
+    font-size: 3rem;
+    text-align: center;
+}
+
+.confirmation_btn_con {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+
+}
+
+
+.confirmation_btn_con button {
+    padding: 1rem 0.5rem;
+    outline: none;
+}
+
+.confirmation_btn_con>button:nth-child(2) {
+    background-color: #E91E63;
+}
