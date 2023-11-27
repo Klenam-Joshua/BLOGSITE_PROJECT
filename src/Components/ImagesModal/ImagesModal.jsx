@@ -6,9 +6,20 @@ import { IoMdCloudUpload } from "react-icons/io";
 // ============= styles
 
 import styles from "./ImagesModal.module.css";
+import { useState } from "react";
 
 
 function ImagesModal({handleCloseImagesModal}) {
+
+     const [postImages, setPostImages] = useState(null);
+
+
+     const handleChange = (files)=>{
+               setPostImages(files);
+               console.log(postImages)
+     }
+
+
   return (
     <div className={styles.imagesModal_backdrop}>
             <div className={styles.imagesModal_container}>
@@ -36,6 +47,8 @@ function ImagesModal({handleCloseImagesModal}) {
                            
                             <input 
                              style={{display:"none"}}
+                               onChange={(e)=>handleChange(e.target.files)}
+
                             type="file" name="images_selector" id="images_selector" multiple />
                             <span>
                                     
