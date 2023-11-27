@@ -2,31 +2,43 @@ import styles from "./CreatePost.module.css"
 
 
 import MainSection from "../../Components/MainSection/MainSection"
+import MessageModal from "../../Components/MessageModal/MessageModal";
+import LoadingAnim from "../../Components/LoadingAnim/LoadingAnim";
 
 //icons 
 import { FaImage } from "react-icons/fa";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 
 
 // ========= context ======
 import { useAuthContext } from "../../Hooks/useAuthContext";
 import { useCreate } from "../../Hooks/useCreatePost";
+import ImagesModal from "../../Components/ImagesModal/ImagesModal";
+
 
 
 
 
 const CreatePost = () => {
   const [imageUrl, setImageUrl] = useState(null);
- 
   const [postTitle, setPostTitle] = useState("");
   const { user } = useAuthContext();
   const post = useRef();
   const [postContent, setPostContent] = useState(null);
+  const { createPost, success,setSuccess, isLoading } = useCreate("posts")
+  
+  const [openImagesModal, setOpenImagesModal] = useState(false);
 
-  const { createPost, success, isLoading } = useCreate("posts")
 
+  const handleOpenImagesModal = ()=>{
+         setOpenImagesModal(true);
+         //console.log("hello")
+  }
 
-
+  const handleCloseImagesModal = ()=>{
+       setOpenImagesModal(false)
+  }
 
   const handleSubmit = (e) => {
 
@@ -47,6 +59,19 @@ const CreatePost = () => {
 
   }
 
+  useEffect(()=>{
+    let timeout = null;
+       if(success){
+      const timeout =  setTimeout(()=>{
+                setSuccess(false)
+        }, 3000)
+       }
+
+
+       return ()=>{if(timeout) clearTimeout(timeout)}
+  },[success])
+
+
   return (
     <MainSection>
 
@@ -62,7 +87,7 @@ const CreatePost = () => {
               &&
 
               <p style={{ color: "green", textAlign: "center", fontSize: "1.4rem" }}>
-                       <p> post created successful</p>
+                        post created successful
               </p>
             }
             <div className={styles.wrapper}>
@@ -73,15 +98,17 @@ const CreatePost = () => {
               <div className={styles.title_field_con}>
                 <input
                   onChange={e => setPostTitle(e.target.value)}
-                  type="text" id="postTitle" placeholder="title" />
+                  type="text" id="postTitle" placeholder="title"  required />
               </div>
               <div className={styles.file_selector_con}>
-                <label htmlFor="file_selector" className="text-center">
+                <span 
+                onClick={handleOpenImagesModal}
+                className="text-center">
                   <FaImage />
-                </label>
-                <input
+                </span>
+                {/* <input
                   onChange={e => setImageUrl(e.target.files[0])}
-                  style={{ display: "none" }} type="file" id="file_selector" />
+                  style={{ display: "none" }} type="file" id="file_selector" multiple /> */}
               </div>
 
               <button type="submit">
@@ -115,7 +142,23 @@ const CreatePost = () => {
         </form>
       </div>
 
-      {/* </div> */}
+  {
+    isLoading &&
+    <MessageModal  message={"post created successfully"} title_message={"creating post ..."} icon={<LoadingAnim/>}/>
+
+  }
+   {
+    success  
+    &&
+    <MessageModal  message={"post created successfully"} title_message={"SUCCESS"} icon={<IoIosCheckmarkCircleOutline/>}/>
+
+   }
+
+      {
+
+        openImagesModal  &&
+        <ImagesModal  handleCloseImagesModal={handleCloseImagesModal}/>
+      }
     </MainSection>
   )
 }

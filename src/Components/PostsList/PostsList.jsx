@@ -62,9 +62,9 @@ const PostsList = ({ posts, handleOpen }) => {
                     key={post.id}
 
                     className={styles.post}>
-                        <div  dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(post.content)}}>
+                        {/* <div  dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(post.content)}}>
                               
-                        </div>
+                        </div> */}
 
                     <div
                          onClick={

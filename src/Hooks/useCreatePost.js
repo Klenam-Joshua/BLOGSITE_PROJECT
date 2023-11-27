@@ -36,7 +36,7 @@ export const useCreate = (collection, method = "GET") => {
    
       
       let resp = await ref.add({ ...doc, createdAt });
-
+      console.log("added success")
       setIsLoading(false);
       setSuccess(true)
 
@@ -56,7 +56,9 @@ export const useCreate = (collection, method = "GET") => {
     catch (error) {
 
       setError(error.message)
+      setIsLoading(false)
       setSuccess(false);
+      console.log(error, "from error")
 
     }
   }
@@ -74,7 +76,7 @@ export const useCreate = (collection, method = "GET") => {
     }
   }, [])
 
-  return { createPost, isLoading, error, success }
+  return { createPost, isLoading, error, success, setSuccess }
 
 }
 
