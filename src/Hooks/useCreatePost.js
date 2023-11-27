@@ -33,6 +33,8 @@ export const useCreate = (collection, method = "GET") => {
     setError(null)
     let createdAt = Timestamp.fromDate(new Date());
     try {
+   
+      
       let resp = await ref.add({ ...doc, createdAt });
 
       setIsLoading(false);

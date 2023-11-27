@@ -1,6 +1,10 @@
 import { useNavigate } from "react-router-dom";
 
 
+//======== Dom purify ==============
+
+import DOMPurify from "dompurify";
+
 import styles from "./PostsList.module.css";
 
 
@@ -58,7 +62,9 @@ const PostsList = ({ posts, handleOpen }) => {
                     key={post.id}
 
                     className={styles.post}>
-
+                        <div  dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(post.content)}}>
+                              
+                        </div>
 
                     <div
                          onClick={

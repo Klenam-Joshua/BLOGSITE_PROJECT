@@ -17,16 +17,15 @@ import Dialog from "../../Components/Dialog/Dialog";
 
 const Posts = () => {
 
-   let { isLoading, error, posts, setPosts, copiedPosts, setCopiedPosts } = useCollection("posts")
+   let { isLoading, error, posts, setPosts, copiedPosts, setCopiedPosts } = useCollection("posts",["createdAt","desc"])
    const [keyWord, setKeyWord] = useState("");
    const [open, setOpen] = useState(false);
    const [postId, setPostId] = useState(null)
 
-
+  
 
    const handleClose = () => {
       setOpen(false);
-      console.log("hello there where are  doing that")
    }
 
 
@@ -34,7 +33,6 @@ const Posts = () => {
    const handleOpen = (id) => {
       setOpen(true);
       setPostId(id)
-      console.log(open, postId, "iposd and is open here")
    }
 
 
@@ -83,7 +81,7 @@ const Posts = () => {
                   }
                   {
                      error &&
-                     <p>
+                     <p  className={styles.error_display_con}>
                         there was a problem fetching your data
                      </p>
 

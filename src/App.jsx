@@ -25,7 +25,7 @@ const App = () => {
    const {user,authIsReady} = useAuthContext()
   return (
    <>
-   {! authIsReady && <p>loading application</p> }
+   {! authIsReady && <p style={{textAlign:"center",fontSize:"2rem", marginTop:"4rem"}}>loading application ...</p> }
      <Router> 
 
           {user && <Sidebar />}

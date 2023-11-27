@@ -14,7 +14,7 @@ export function useDelete(collection) {
         try {
             let response = await projectFirestore.collection(collection).doc(id).delete()
             console.log(response)
-            console.log("working here just like that")
+          
             if (!response) {
 
             }

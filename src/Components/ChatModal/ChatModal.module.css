@@ -3,16 +3,19 @@
     z-index: 100;
     height: 100vh;
     width: 100vw;
-
-    position: fixed;
     left: 0;
     bottom: 0;
     padding-top: 0 ! important;
     top: 0;
+    display: none;
 }
 
 
 
+.active_chat_top{
+    display: flex;
+    justify-content: space-between;
+}
 
 .chat_modal {
     position: relative;
@@ -20,13 +23,29 @@
     width: 40rem;
     margin-top: 0;
     min-height: 70rem;
-    margin-left: calc(100% - 40rem);
-    margin-right: -60rem;
+    margin-left: 100%;
+ 
     background: white;
+    transition:all 0.5s;
 }
 
 .chat_modal>div {
     background: var(--sidebar-color);
     padding: 1.4rem 1rem;
 
+}
+
+.show_chat_modal_container{
+     display: block;
+}
+
+.show_chat_modal_container .chat_modal{
+        margin-left: calc(100% - 40rem);
+        transition:all 0.5s;
+}
+
+.cancel{
+    font-size: 2.4rem;
+    color:white;
+    cursor: pointer;
 }

@@ -3,14 +3,14 @@ import { projectFirestore } from "../firebase/firebase"
 import { useAuthContext } from "./useAuthContext"
 import { projectStorage } from "../firebase/firebase"
 
-export const useCollection = (collection, query, orderBy) => {
+export const useCollection = (collection, orderBy ) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [posts, setPosts] = useState(null);
   const [copiedPosts, setCopiedPosts] = useState(null)
   let ref = projectFirestore.collection(collection);
-  let _query = useRef(query).current;
+  //let _query = useRef(query).current;
   let _orderBy = useRef(orderBy).current
 
 
@@ -19,14 +19,14 @@ export const useCollection = (collection, query, orderBy) => {
   useEffect(() => {
     setIsLoading(true);
     setError(false);
-    if (query) {
-      ref = ref.where(_query);
-    }
-
-    if (orderBy) {
-      ref = ref.orderBy(_orderBy)
-    }
-    const unsb = ref.onSnapshot((snapshot) => {
+    // if (query) {
+    //   ref = ref.where(_query);
+    // }
+ if(_orderBy){
+  
+ }
+    
+    const unsb = ref.orderBy("createdAt", "desc").onSnapshot((snapshot) => {
       let articles = [];
       snapshot.forEach((doc) => {
         // projectStorage.
@@ -39,6 +39,8 @@ export const useCollection = (collection, query, orderBy) => {
       setIsLoading(false)
     }, (error) => {
       setError(error.message)
+      console.log(error)
+      setIsLoading(false)
     })
 
 

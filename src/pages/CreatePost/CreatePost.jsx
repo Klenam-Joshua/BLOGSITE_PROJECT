@@ -17,10 +17,11 @@ import { useCreate } from "../../Hooks/useCreatePost";
 
 const CreatePost = () => {
   const [imageUrl, setImageUrl] = useState(null);
-  const [postContent, setPostContent] = useState(null);
+ 
   const [postTitle, setPostTitle] = useState("");
   const { user } = useAuthContext();
   const post = useRef();
+  const [postContent, setPostContent] = useState(null);
 
   const { createPost, success, isLoading } = useCreate("posts")
 
@@ -30,7 +31,8 @@ const CreatePost = () => {
   const handleSubmit = (e) => {
 
     e.preventDefault();
-    setPostContent(post.current.innerHTML)
+   // setPostContent(post.current.innerHTML)
+    
 
     const doc = {
       authorName: user.email.split()[0],
@@ -39,7 +41,7 @@ const CreatePost = () => {
       postTitle: postTitle
 
     }
-
+    console.log(doc)
     createPost(doc, imageUrl)
 
 
@@ -60,8 +62,7 @@ const CreatePost = () => {
               &&
 
               <p style={{ color: "green", textAlign: "center", fontSize: "1.4rem" }}>
-
-                post created successfully
+                       <p> post created successful</p>
               </p>
             }
             <div className={styles.wrapper}>
@@ -91,8 +92,14 @@ const CreatePost = () => {
 
           <div className={styles.textarea_con}>
 
-            <div ref={post} contentEditable={true}
+            <div ref={post} 
+
+              onInput={(e)=>setPostContent(e.currentTarget.innerHTML)}
+
+              contentEditable={true}  
+
               suppressContentEditableWarning={true}
+
               className={styles.textbox}
 
             >

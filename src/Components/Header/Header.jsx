@@ -61,17 +61,21 @@ const Header = ({ }) => {
               setOpenChatModal(true)
        }
 
-       const handleClose = () => {
+       const handleCloseChat= () => {
               setOpenChatModal(false)
        }
 
 
        useEffect(() => {
-              if (fullScreen) {
-                     document.body.requestFullscreen()
-              }
-              if (!fullScreen) {
-                     document.exitFullscreen()
+              try {
+                     if (fullScreen) {
+                            document.body.requestFullscreen()
+                     }
+                     if (!fullScreen) {
+                            document.exitFullscreen()
+                     }
+              } catch (error) {
+                       console.log(error.message )
               }
 
        }, [fullScreen])
@@ -135,14 +139,18 @@ const Header = ({ }) => {
 
 
 
-*/}
+*/}                  
 
                      </header>
-                     {openChatModal &&
+                    
 
-                            <ChatModal />
+                 {
+                     createPortal((
+                            <ChatModal  class_name = {openChatModal} handleCloseChat={handleCloseChat} />
+                     ),document.body)
+                 }  
 
-                     }
+                     
 
               </>
        )
