@@ -23,7 +23,7 @@ const handleClose = (e)=>{
                                         </div>
                                         <span 
                                         onClick={handleCloseChat}
-                                         className={styles.cancel}>
+                                         F ={styles.cancel}>
                                                 <IoClose />
                                         </span>
                                 </div>
