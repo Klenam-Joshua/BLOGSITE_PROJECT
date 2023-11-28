@@ -2,19 +2,20 @@ import { IoClose } from "react-icons/io5";
 // styles
 import styles from "./ChatModal.module.css";
 
-const ChatModal = ({class_name, handleCloseChat}) => {
+const ChatModal = ({ class_name, handleCloseChat }) => {
 
-        
-const handleClose = (e)=>{
-        e.stopPropagation();
-       
-        handleCloseChat();
 
-}
+        const handleClose = (e) => {
+                console.log(e)
+                e.stopPropagation();
+
+                handleCloseChat();
+
+        }
         return (
-                <div 
-                onClick={(e)=>handleClose(e)}
-                className={class_name ? `${styles.chat_modal_container} ${styles.show_chat_modal_container}` : styles.chat_modal_container}>
+                <div
+                        onClick={(e) => handleClose(e)}
+                        className={class_name ? `${styles.chat_modal_container} ${styles.show_chat_modal_container}` : styles.chat_modal_container}>
 
                         <div className={styles.chat_modal}>
                                 <div className={styles.active_chat_top}>
@@ -23,7 +24,7 @@ const handleClose = (e)=>{
                                         </div>
                                         <span 
                                         onClick={handleCloseChat}
-                                         F ={styles.cancel}>
+                                         className={styles.cancel}>
                                                 <IoClose />
                                         </span>
                                 </div>
