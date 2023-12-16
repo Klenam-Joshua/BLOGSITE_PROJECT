@@ -65,7 +65,7 @@ export default function Login() {
                     </div>
                     <a href="#"  > Forgot password?</a>
                     <button type="submit"
-                        onClick={() => console.log("hi therereer")}
+                        
 
                         disabled={isLoading ? true : false}>
                         {isLoading ? <LoadingAnim /> : "Login"}

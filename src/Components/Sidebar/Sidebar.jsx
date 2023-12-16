@@ -6,6 +6,7 @@ import   styles from "./Sidebar.module.css"
 
 //  ==================  images =============
 import Logo from "../../assets/images/Logo.png"
+import aLogo from "../../assets/images/aLogo.png"
 import avatar from "../../assets/images/avatar.png"
 
 
@@ -38,7 +39,7 @@ const Sidebar = ({children}) => {
              <aside  id='sidbar'  className={sidebarIsOpen ? styles.sidebar : `${styles.sidebar}  ${styles.view}` } >
               <div className="row  justify-between">
                     <div id="logo_container"  className={styles.logo_container}>
-                           <img src={Logo} alt="brand_logo" />
+                           <img src={aLogo} alt="brand_logo" />
                     </div>
                              
                     <div 

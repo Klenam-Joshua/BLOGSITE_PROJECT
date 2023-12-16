@@ -5,6 +5,8 @@ import MainSection from "../../Components/MainSection/MainSection"
 import MessageModal from "../../Components/MessageModal/MessageModal";
 import LoadingAnim from "../../Components/LoadingAnim/LoadingAnim";
 
+import DOMPurify from "dompurify";
+
 //icons 
 import { FaImage } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
@@ -26,7 +28,7 @@ const CreatePost = () => {
   const { user } = useAuthContext();
   const post = useRef();
   const [postContent, setPostContent] = useState(null);
-  const { createPost, success,setSuccess, isLoading } = useCreate("posts")
+  const { createPost, success,setSuccess, isLoading, handleUploadImage } = useCreate("posts")
   
   const [openImagesModal, setOpenImagesModal] = useState(false);
 
@@ -53,8 +55,8 @@ const CreatePost = () => {
       postTitle: postTitle
 
     }
-    console.log(doc)
-    createPost(doc, imageUrl)
+  
+   // createPost(doc, imageUrl)
 
 
   }
@@ -124,7 +126,7 @@ const CreatePost = () => {
               onInput={(e)=>setPostContent(e.currentTarget.innerHTML)}
 
               contentEditable={true}  
-
+               dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(postContent)}}
               suppressContentEditableWarning={true}
 
               className={styles.textbox}
@@ -157,7 +159,7 @@ const CreatePost = () => {
       {
 
         openImagesModal  &&
-        <ImagesModal  handleCloseImagesModal={handleCloseImagesModal}/>
+        <ImagesModal setPostContent ={setPostContent}  handleCloseImagesModal={handleCloseImagesModal}/>
       }
     </MainSection>
   )

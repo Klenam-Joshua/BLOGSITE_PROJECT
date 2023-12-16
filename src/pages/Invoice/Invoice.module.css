@@ -1,0 +1,105 @@
+.invoice_verification_container{
+    width:100vw;;
+    ; 
+    /* background-color: ; */
+}
+
+form{
+   height: 100%;
+}
+
+.header{
+   width:90%;
+   margin:auto;
+
+}
+.form_container {
+   width:90%;
+   margin:auto;
+   height: 100%;
+  
+
+}
+.form_container h1{
+   font-weight: 700;
+}
+.form_content_wrapper {
+   /* display: flex; */
+  
+   display: grid;
+   grid-template-columns:1fr 2fr  2fr;
+   margin-top:3rem;
+   height:100%;
+}
+
+
+.invoice_section .content_section   button{
+          background-color: #009ecd;
+          border:none;
+          border-radius:5px;
+          color:white;
+}
+
+
+.content_section{
+  min-height: 100%;
+}
+.content_section img{
+   width:90%;
+   height:80%;
+}
+
+#content_section1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: green;
+}
+
+.invoice_section{
+   display: flex;
+   flex-direction: column;
+}
+.invoice_section .section_header{
+              border:1px solid;
+              background:#009ecd;
+}
+
+.qr_status_section{
+   display: flex;
+   align-items: center;
+   color:green;
+   
+}
+
+
+
+
+
+
+
+
+
+.sbtn_container{
+   margin-top:9rem;
+   display: flex;
+   justify-content: center;
+   
+}
+
+.sbtn_container button{
+   display: inline-block;
+   width:50%;
+}
+
+
+@media (max-width:669px) {
+      .form_content_wrapper{
+       grid-template-columns: 1fr;
+       grid-template-rows: 1fr 1fr 1fr;
+      }
+
+      .content_section{
+       margin-top:10rem;
+      }
+}

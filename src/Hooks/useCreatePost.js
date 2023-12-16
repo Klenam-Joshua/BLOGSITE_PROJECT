@@ -11,42 +11,23 @@ export const useCreate = (collection, method = "GET") => {
   const [isCancelled, setIsCancelled] = useState(false);
 
 
-  const ref = projectFirestore.collection(collection, method = "GET");
 
 
 
 
+  const ref = projectFirestore.collection(collection);
 
 
-
-
-
-
-
-  const createPost = async (doc, imageUrl) => {
-
-
-
-
+  const createPost = async (doc) => {
 
     setIsLoading(true);
     setError(null)
     let createdAt = Timestamp.fromDate(new Date());
     try {
-   
       
       let resp = await ref.add({ ...doc, createdAt });
-      console.log("added success")
       setIsLoading(false);
       setSuccess(true)
-
-
-
-      const imagePath = `/blogImages/${resp.id}/${imageUrl.name}`;
-      let img = await projectStorage.ref(imagePath).put(imageUrl);
-      const imgUrl = await img.ref.getDownloadURL()
-      await ref.doc(resp.id).update({ postImageUrl: imgUrl })
-
     }
 
 
@@ -64,19 +45,59 @@ export const useCreate = (collection, method = "GET") => {
   }
 
 
-  const deleteData = () => {
+  const uploadImages = async (image, setUploadedImages)=>{
+  try {
+console.log("invoked")
 
+      let milliseconds =   new Date().getTime();
+      let imageSubDirectory = (Math.random(0, 1)  * 10) + milliseconds;
+  
+      const imagePath = `/blog_images/${imageSubDirectory}/${image.name}`;
+      // console.log(imagePath, "path")
+      let img = await projectStorage.ref(imagePath).put(image);
+      const imgUrl = await img.ref.getDownloadURL()
+      let newImagesUrl = [];
+      newImagesUrl.push(imgUrl);
+      setUploadedImages(newImagesUrl)
+     //setPostImages(newImagesUrl)
+   
+      console.log(imgUrl)
+    
+    
+  } catch (error) {
+      console.log(error.message)
+      // error to be handled professionally
+  }
+
+  }
+
+  const handleUploadImage =async (postImages, setUploadedImages) => {      
+            if(postImages){
+                  try {
+                   
+                    postImages.map((postImage)=>{
+                   
+                       uploadImages(postImage, setUploadedImages)
+                      // console.log("uploaded the image")
+                      // console.log("uploaded images successfully")
+                    })
+                     
+                  } catch (error) {
+                      console.log(error.message)
+                  }
+            }
   }
 
 
   useEffect(() => {
+     setIsCancelled(false)
+
     return () => {
       setIsCancelled(true);
-      console.log("you have cancelled your request thank you")
     }
   }, [])
 
-  return { createPost, isLoading, error, success, setSuccess }
+  return {createPost, isLoading, error, success, setSuccess, uploadImages,handleUploadImage }
 
 }
 

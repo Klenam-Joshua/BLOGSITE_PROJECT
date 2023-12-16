@@ -19,6 +19,7 @@ export const useLogin = () => {
                     setIsLoading(false);
                     setError("there wase an error signing user in")
                  }
+                  
                   dispatch({type:"LOGIN", payload:{...resp.user}})
                
                 setIsLoading(false)

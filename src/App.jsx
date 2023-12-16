@@ -5,6 +5,10 @@ import { BrowserRouter as Router, Routes , Route, BrowserRouter, Navigate } from
 
 import "./assets/styles/global.css"
 
+//==================== images ====
+
+import aLogo from './assets/images/aLogo.png'
+
 
 // components
 
@@ -19,19 +23,27 @@ import Login from './pages/Login/Login'
 //context
 import { useAuthContext } from './Hooks/useAuthContext'
 import CreatePost from './pages/CreatePost/CreatePost'
+import InvoiceVerification from './pages/Invoice/Invoice'
 
 
 const App = () => {
    const {user,authIsReady} = useAuthContext()
   return (
    <>
-   {! authIsReady && <p style={{textAlign:"center",fontSize:"2rem", marginTop:"4rem"}}>loading application ...</p> }
+   {! authIsReady && <div  className="row justify-center align-center" 
+    style={{height:"100%"}}>
+        <div   className='dim' >
+            <img src={aLogo}   alt='brand_logo'/>
+         </div>
+        </div>
+       }
      <Router> 
 
           {user && <Sidebar />}
               {
                authIsReady &&
               <Routes>
+                     <Route  path='/invoice' element={<InvoiceVerification/>}/>
                        <Route path="/create-post"  element={!user ?<Navigate to="/login"/> :<CreatePost/>} />
                        <Route path='/login' element={user ? <Navigate to="/"/> : <Login />  }/>
                        <Route path='/' element={ !user?  <Navigate to="/login"/> : <Posts/>} />

@@ -63,3 +63,17 @@
     font-size:1.4rem;
 
 }
+
+.imagesDisplayModal{
+    display: flex;
+    flex-wrap: wrap;
+    gap:1rem;
+     
+}
+
+.imagesDisplayModal img{
+    max-width:10rem;
+    height:10rem;
+  
+
+}
