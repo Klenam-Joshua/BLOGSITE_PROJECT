@@ -9,16 +9,21 @@ import Header from "../Header/Header";
 
 import { useSettinsContext } from "../../Hooks/useSettingsContext";
 
-const MainSection = ({children}) => {
-  const {dispatch, sidebarIsOpen} = useSettinsContext();
+const MainSection = ({ children, needNotHeader }) => {
+  const { dispatch, sidebarIsOpen } = useSettinsContext();
   return (
-       <main 
-        onClick={(e)=>console.log(e.target)}
-       className={sidebarIsOpen ? styles.main_section :  `${styles.main_section}  ${styles.main_section_full}`}  id="main_container">
-      
-             <Header  />
-             {children}
-       </main>
+    <main
+      className={sidebarIsOpen ? styles.main_section : `${styles.main_section}  
+      ${styles.main_section_full}`}
+      id="main_container"
+    >
+
+      {
+        !needNotHeader &&
+        < Header />
+      }
+      {children}
+    </main>
   )
 }
 

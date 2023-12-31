@@ -1,9 +1,9 @@
 import "./LoadingAnim.css"
 
-const LoadingAnim = ({dynamic_class}) => {
+const LoadingAnim = ({ className }) => {
   return (
-    <div className={` rotating-div  ${dynamic_class}`}>
-             
+    <div className={` rotating-div  ${className}`}>
+
     </div>
   )
 }

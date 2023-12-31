@@ -2,10 +2,11 @@ import styles from "./Login.module.css";
 import { useState } from "react";
 
 //images
-import Logo from "../../assets/images/Logo.png"
+import Logo from "../../assets/images/aLogo.png"
+
+
 // ======== other components========
 import FormsWrapper from "../../Components/formsWrapper/formsWrapper";
-
 import LoadingAnim from "../../Components/LoadingAnim/LoadingAnim";
 
 //  custom hooks
@@ -39,6 +40,7 @@ export default function Login() {
     return (
         <FormsWrapper>
             <div className={styles.login_form_wrapper} >
+
                 <div className={styles.logo_wrapper}>
                     <img src={Logo} alt="brandLogo" />
                 </div>
@@ -65,7 +67,7 @@ export default function Login() {
                     </div>
                     <a href="#"  > Forgot password?</a>
                     <button type="submit"
-                        
+
 
                         disabled={isLoading ? true : false}>
                         {isLoading ? <LoadingAnim /> : "Login"}

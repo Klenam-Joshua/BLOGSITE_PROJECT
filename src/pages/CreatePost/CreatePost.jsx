@@ -4,6 +4,7 @@ import styles from "./CreatePost.module.css"
 import MainSection from "../../Components/MainSection/MainSection"
 import MessageModal from "../../Components/MessageModal/MessageModal";
 import LoadingAnim from "../../Components/LoadingAnim/LoadingAnim";
+import StylesBar from "./stylesBar";
 
 import DOMPurify from "dompurify";
 
@@ -26,27 +27,38 @@ const CreatePost = () => {
   const [imageUrl, setImageUrl] = useState(null);
   const [postTitle, setPostTitle] = useState("");
   const { user } = useAuthContext();
-  const post = useRef();
+  const postRef = useRef();
+
   const [postContent, setPostContent] = useState(null);
-  const { createPost, success,setSuccess, isLoading, handleUploadImage } = useCreate("posts")
-  
+  const { createPost, success, setSuccess, isLoading, handleUploadImage } = useCreate("posts")
+
   const [openImagesModal, setOpenImagesModal] = useState(false);
 
 
-  const handleOpenImagesModal = ()=>{
-         setOpenImagesModal(true);
-         //console.log("hello")
+  const handleInsertSelectedImages = (images) => {
+    let currentImages = images.map((imageUrl) => {
+      return `<img src=${imageUrl} alt='posturl' />  <br/>`
+
+    })
+    postRef.current.innerHTML += DOMPurify.sanitize(currentImages)
+    //setPostContent(prev => prev + currentImages)
+
   }
 
-  const handleCloseImagesModal = ()=>{
-       setOpenImagesModal(false)
+  const handleOpenImagesModal = () => {
+    setOpenImagesModal(true);
+    //console.log("hello")
+  }
+
+  const handleCloseImagesModal = () => {
+    setOpenImagesModal(false)
   }
 
   const handleSubmit = (e) => {
 
     e.preventDefault();
-   // setPostContent(post.current.innerHTML)
-    
+    // setPostContent(post.current.innerHTML)
+
 
     const doc = {
       authorName: user.email.split()[0],
@@ -55,27 +67,27 @@ const CreatePost = () => {
       postTitle: postTitle
 
     }
-  
-   // createPost(doc, imageUrl)
+
+    // createPost(doc, imageUrl)
 
 
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     let timeout = null;
-       if(success){
-      const timeout =  setTimeout(()=>{
-                setSuccess(false)
-        }, 3000)
-       }
+    if (success) {
+      const timeout = setTimeout(() => {
+        setSuccess(false)
+      }, 3000)
+    }
 
 
-       return ()=>{if(timeout) clearTimeout(timeout)}
-  },[success])
+    return () => { if (timeout) clearTimeout(timeout) }
+  }, [success])
 
 
   return (
-    <MainSection>
+    <MainSection needNotHeader={true}>
 
       <div
 
@@ -89,7 +101,7 @@ const CreatePost = () => {
               &&
 
               <p style={{ color: "green", textAlign: "center", fontSize: "1.4rem" }}>
-                        post created successful
+                post created successful
               </p>
             }
             <div className={styles.wrapper}>
@@ -100,66 +112,100 @@ const CreatePost = () => {
               <div className={styles.title_field_con}>
                 <input
                   onChange={e => setPostTitle(e.target.value)}
-                  type="text" id="postTitle" placeholder="title"  required />
+                  type="text" id="postTitle" placeholder="title" required />
               </div>
-              <div className={styles.file_selector_con}>
-                <span 
-                onClick={handleOpenImagesModal}
-                className="text-center">
-                  <FaImage />
-                </span>
+
+              <div className={styles.editor_controls_con}>
+
+                <StylesBar >
+                  <span
+                    onClick={handleOpenImagesModal}
+                    className="text-center">
+                    <FaImage />
+                  </span>
+                </StylesBar >
+                {/* <div className={styles.file_selector_con}>
+                  <span
+                    onClick={handleOpenImagesModal}
+                    className="text-center">
+                    <FaImage />
+                  </span> */}
                 {/* <input
                   onChange={e => setImageUrl(e.target.files[0])}
                   style={{ display: "none" }} type="file" id="file_selector" multiple /> */}
+                {/* </div> */}
               </div>
 
-              <button type="submit">
+              {/* <button type="submit">
                 Publish Post
-              </button>
+              </button> */}
             </div>
           </div>
 
+
           <div className={styles.textarea_con}>
 
-            <div ref={post} 
+            <div ref={postRef}
+              ///+++++
+              onKeyDown={(e) => {
+                console.log("run this code")
+                let emptyString = "  "
+                if (!e.target.innerHTML) {
+                  e.target.innerHTML = e.target.innerHTML + `<h1> &nbsp </h1>`
+                  console.log("hi hi")
+                  console.log(e.target.innerHTML)
+                }
+                else {
 
-              onInput={(e)=>setPostContent(e.currentTarget.innerHTML)}
+                }
+              }}
+              onInput={e => {
+                setPostContent(e.currentTarget.innerHTML)
 
-              contentEditable={true}  
-               dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(postContent)}}
+              }}
+
+              contentEditable={true}
+
+              // dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(postContent) }}
               suppressContentEditableWarning={true}
+              onMouseUp={(e) => {
+                console.log(window.getSelection().getRangeAt(0).commonAncestorContainer.parentNode)
+                //console.log(window.getSelection().getRangeAt(1).commonAncestorContainer.parentNode)
+
+              }}
 
               className={styles.textbox}
 
             >
 
-              {
-                imageUrl && <img
-                  draggable="true"
-                  src={URL.createObjectURL(imageUrl)} alt="blogImageUrl" />
-              }
 
             </div>
           </div>
+
         </form>
       </div>
 
-  {
-    isLoading &&
-    <MessageModal  message={"post created successfully"} title_message={"creating post ..."} icon={<LoadingAnim/>}/>
+      {
+        isLoading &&
+        <MessageModal message={"post created successfully"} title_message={"creating post ..."} icon={<LoadingAnim />} />
 
-  }
-   {
-    success  
-    &&
-    <MessageModal  message={"post created successfully"} title_message={"SUCCESS"} icon={<IoIosCheckmarkCircleOutline/>}/>
+      }
+      {
+        success
+        &&
+        <MessageModal message={"post created successfully"} title_message={"SUCCESS"} icon={<IoIosCheckmarkCircleOutline />} />
 
-   }
+      }
 
       {
 
-        openImagesModal  &&
-        <ImagesModal setPostContent ={setPostContent}  handleCloseImagesModal={handleCloseImagesModal}/>
+        openImagesModal &&
+        <ImagesModal
+          postRef={postRef}
+
+          setPostContent={setPostContent}
+          handleInsertSelectedImages={handleInsertSelectedImages}
+          handleCloseImagesModal={handleCloseImagesModal} />
       }
     </MainSection>
   )

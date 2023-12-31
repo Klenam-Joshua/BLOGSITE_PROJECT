@@ -17,12 +17,12 @@ import Dialog from "../../Components/Dialog/Dialog";
 
 const Posts = () => {
 
-   let { isLoading, error, posts, setPosts, copiedPosts, setCopiedPosts } = useCollection("posts",["createdAt","desc"])
+   let { isLoading, error, posts, setPosts, copiedPosts, setCopiedPosts } = useCollection("posts", ["createdAt", "desc"])
    const [keyWord, setKeyWord] = useState("");
    const [open, setOpen] = useState(false);
    const [postId, setPostId] = useState(null)
 
-  
+
 
    const handleClose = () => {
       setOpen(false);
@@ -81,7 +81,7 @@ const Posts = () => {
                   }
                   {
                      error &&
-                     <p  className={styles.error_display_con}>
+                     <p className={styles.error_display_con}>
                         there was a problem fetching your data
                      </p>
 
@@ -89,7 +89,7 @@ const Posts = () => {
                   {
                      isLoading &&
                      <div className={styles.loadingAnim_con}>
-                        <LoadingAnim dynamic_class="loading-div" />
+                        <LoadingAnim className="loading-div" />
                      </div>
                   }
 

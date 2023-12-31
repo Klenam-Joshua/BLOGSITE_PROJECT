@@ -1,78 +1,89 @@
-.login_form_wrapper{
-width:30vw;
-    margin:auto;
+.login_form_wrapper {
+    width: 30vw;
+    margin: auto;
 }
 
-.login_form_wrapper h2{
+.login_form_wrapper h2 {
     font-family: var(--font-roboto);
-    font-size:4rem;
+    font-size: calc(2vw + 1rem);
     font-weight: 900;
-    color:var(--sidebar-color);
+    color: var(--sidebar-color);
+    text-wrap: nowrap;
 }
-.logo_wrapper{
+
+.logo_wrapper {
     display: flex;
     justify-content: center;
 }
-.login_form_wrapper img{
-    width:4rem;
-    height: 4rem;;
+
+.login_form_wrapper img {
+    /* width:4rem;
+    height: 4rem;; */
 }
 
 
-.field_wrapper{
+.field_wrapper {
     width: 100%;
-    margin-top:2rem;;
-    
+    margin-top: 2rem;
+    ;
+
 }
 
- fieldset{
-    margin:auto;
-    border:1px solid  gray;
-    border-radius:5px;
-   padding-bottom:0.2rem;
+fieldset {
+    margin: auto;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding-bottom: 0.2rem;
 }
 
-legend{
+legend {
     text-transform: capitalize;
-    font-size:1.3rem;
-    margin-left:1rem;
-    color:black;
-    
-    
+    font-size: 1.3rem;
+    margin-left: 1rem;
+    color: black;
+
+
 }
 
 
-input{
+input {
     width: 100%;
-    height:100%;
-    padding:1rem 1.2rem;
-    border:none;
-    outline:none; 
-    font-size:1.4rem;
-   
-  
+    height: 100%;
+    padding: 1rem 1.2rem;
+    border: none;
+    outline: none;
+    font-size: 1.4rem;
+
+
 }
 
-input[type="password"]{
- 
+input[type="password"] {
+
     font-weight: 700;
 }
 
 
-.login_form_wrapper a{
-    font-size:1.6rem;
- display:inline-block;
-    margin:1rem  1rem;
-  
+.login_form_wrapper a {
+    font-size: 1.6rem;
+    display: inline-block;
+    margin: 1rem 1rem;
+
 }
 
-button{
-    width:100%;
-    background:#4647e1;
-    padding:1.4rem 1.4rem;
-    margin-top:1rem;
-    border:none;
-    border-radius:20px;
-    color:white;
-    cursor:pointer;
+button {
+    width: 100%;
+    background: #4647e1;
+    padding: 1.4rem 1.4rem;
+    margin-top: 1rem;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+
+@media (max-width:854px) {
+    .login_form_wrapper {
+        width: calc(20vw + 20rem)
+    }
 }

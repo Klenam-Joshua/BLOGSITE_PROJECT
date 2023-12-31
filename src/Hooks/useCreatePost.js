@@ -24,7 +24,7 @@ export const useCreate = (collection, method = "GET") => {
     setError(null)
     let createdAt = Timestamp.fromDate(new Date());
     try {
-      
+
       let resp = await ref.add({ ...doc, createdAt });
       setIsLoading(false);
       setSuccess(true)
@@ -45,59 +45,71 @@ export const useCreate = (collection, method = "GET") => {
   }
 
 
-  const uploadImages = async (image, setUploadedImages)=>{
-  try {
-console.log("invoked")
+  const uploadImages = async (index, image, handleSetUploadedImages, handleResetImageProperties) => {
+    try {
 
-      let milliseconds =   new Date().getTime();
-      let imageSubDirectory = (Math.random(0, 1)  * 10) + milliseconds;
-  
-      const imagePath = `/blog_images/${imageSubDirectory}/${image.name}`;
-      // console.log(imagePath, "path")
-      let img = await projectStorage.ref(imagePath).put(image);
-      const imgUrl = await img.ref.getDownloadURL()
+
+      let milliseconds = new Date().getTime();
+      let imageSubDirectory = (Math.random(0, 1) * 10) + milliseconds;
+
+      const imagePath = `/blog_images/${imageSubDirectory}/${image.file.name}`;
+      console.log("reached here and loading")
+      let uploadTask = await projectStorage.ref(imagePath).put(image.file);
+
+      // console.log(uploadTask.bytesTransferred, "bytes transferred")
+
+
+
+      const imgUrl = await uploadTask.ref.getDownloadURL()
       let newImagesUrl = [];
       newImagesUrl.push(imgUrl);
-      setUploadedImages(newImagesUrl)
-     //setPostImages(newImagesUrl)
-   
-      console.log(imgUrl)
-    
-    
-  } catch (error) {
+      handleSetUploadedImages(newImagesUrl)
+
+
+      handleResetImageProperties(index, { ...image, file: imgUrl, uploadingImage: false, uploadedImage: true })
+
+
+    } catch (error) {
+      console.log("there was an error uploading the files")
+      handleResetImageProperties(index, { ...image, file: null, uploadingImage: false, uploadedImage: false, error: error.message })
       console.log(error.message)
       // error to be handled professionally
-  }
+
+
+    }
 
   }
 
-  const handleUploadImage =async (postImages, setUploadedImages) => {      
-            if(postImages){
-                  try {
-                   
-                    postImages.map((postImage)=>{
-                   
-                       uploadImages(postImage, setUploadedImages)
-                      // console.log("uploaded the image")
-                      // console.log("uploaded images successfully")
-                    })
-                     
-                  } catch (error) {
-                      console.log(error.message)
-                  }
-            }
+  const handleUploadImage = async (postImages, handleSetUploadedImages, handleResetImageProperties) => {
+    console.log("invoked from inside")
+    if (postImages.length > 0) {
+      try {
+        for (let i = 0; i < postImages.length; i++) {
+          if (!postImages[i].uploadedImage) {
+
+            handleResetImageProperties(i, { ...postImages[i], uploadingImage: true })
+
+            await uploadImages(i, postImages[i], handleSetUploadedImages, handleResetImageProperties)
+          }
+        }
+
+
+      } catch (error) {
+        console.log(error.message)
+      }
+    }
   }
 
 
   useEffect(() => {
-     setIsCancelled(false)
+    setIsCancelled(false)
 
     return () => {
       setIsCancelled(true);
     }
   }, [])
 
-  return {createPost, isLoading, error, success, setSuccess, uploadImages,handleUploadImage }
+  return { createPost, isLoading, error, success, setSuccess, uploadImages, handleUploadImage }
 
 }
 

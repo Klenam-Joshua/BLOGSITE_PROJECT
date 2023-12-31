@@ -10,11 +10,11 @@ export function useDelete(collection) {
 
 
     const deleteDoc = async (id) => {
-               setDeletingData(true)
+        setDeletingData(true)
         try {
             let response = await projectFirestore.collection(collection).doc(id).delete()
             console.log(response)
-          
+
             if (!response) {
 
             }
