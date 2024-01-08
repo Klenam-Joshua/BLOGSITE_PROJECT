@@ -6,7 +6,7 @@ const ChatModal = ({ class_name, handleCloseChat }) => {
 
 
         const handleClose = (e) => {
-                console.log(e)
+
                 e.stopPropagation();
 
                 handleCloseChat();
@@ -22,9 +22,9 @@ const ChatModal = ({ class_name, handleCloseChat }) => {
                                         <div className={styles.active_receiver_details}>
                                                 <img src={""} alt="receiver_avatar" />
                                         </div>
-                                        <span 
-                                        onClick={handleCloseChat}
-                                         className={styles.cancel}>
+                                        <span
+                                                onClick={handleCloseChat}
+                                                className={styles.cancel}>
                                                 <IoClose />
                                         </span>
                                 </div>

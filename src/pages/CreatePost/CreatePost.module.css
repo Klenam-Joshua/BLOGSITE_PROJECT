@@ -47,12 +47,10 @@
 
 
 .textbox {
-
     height: 70vh;
-    ;
     outline: none;
     resize: none;
-    border: None;
+    border: none;
     border-color: #bfbbbb;
     padding: 1rem 4rem;
     overflow: auto;
@@ -60,14 +58,24 @@
     font-size: 2rem;
 }
 
+.file_selector_con {
+    padding-left: 3rem;
+    padding-top: 1.5rem;
+}
+
 .file_selector_con span {
-    font-size: 3rem;
+    font-size: 2rem;
     padding-top: 2rem;
-    color: #4647e1;
+    color: #322d2d;
     cursor: pointer;
 
 }
 
 .editor_controls_con {
     margin-top: 3rem;
+}
+
+.loadingAnim {
+    border: 0.2vw solid blue;
+    border-top-color: transparent;
 }

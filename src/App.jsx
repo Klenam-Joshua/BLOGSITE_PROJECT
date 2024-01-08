@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes , Route, BrowserRouter, Navigate } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, BrowserRouter, Navigate } from 'react-router-dom'
 
 //======css ======
 
@@ -27,36 +27,36 @@ import InvoiceVerification from './pages/Invoice/Invoice'
 
 
 const App = () => {
-   const {user,authIsReady} = useAuthContext()
+  const { user, authIsReady } = useAuthContext()
   return (
-   <>
-   {! authIsReady && <div  className="row justify-center align-center" 
-    style={{height:"100%"}}>
-        <div   className='dim' >
-            <img src={aLogo}   alt='brand_logo'/>
-         </div>
+    <>
+      {!authIsReady && <div className="row justify-center align-center"
+        style={{ height: "100%" }}>
+        <div className='dim' >
+          <img src={aLogo} alt='brand_logo' />
         </div>
-       }
-     <Router> 
+      </div>
+      }
+      <Router>
 
-          {user && <Sidebar />}
-              {
-               authIsReady &&
-              <Routes>
-                     <Route  path='/invoice' element={<InvoiceVerification/>}/>
-                       <Route path="/create-post"  element={!user ?<Navigate to="/login"/> :<CreatePost/>} />
-                       <Route path='/login' element={user ? <Navigate to="/"/> : <Login />  }/>
-                       <Route path='/' element={ !user?  <Navigate to="/login"/> : <Posts/>} />
-                       <Route  path ="/comments"  element={!user ?  <Navigate to="/login"/> : <Comments/>}/>
-                       
-                </Routes>
-               
-           
-              }
-        
-     
-     </Router>
-     </>
+        {user && <Sidebar />}
+        {
+          authIsReady &&
+          <Routes>
+            <Route path='/invoice' element={<InvoiceVerification />} />
+            <Route path="/create-post" element={!user ? <Navigate to="/login" /> : <CreatePost />} />
+            <Route path='/login' element={user ? <Navigate to="/" /> : <Login />} />
+            <Route path='/' element={!user ? <Navigate to="/login" /> : <Posts />} />
+            <Route path="/comments" element={!user ? <Navigate to="/login" /> : <Comments />} />
+
+          </Routes>
+
+
+        }
+
+
+      </Router>
+    </>
   )
 }
 

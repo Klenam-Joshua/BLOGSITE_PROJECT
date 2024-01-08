@@ -62,7 +62,7 @@ const PostsList = ({ posts, handleOpen }) => {
                     key={post.id}
 
                     className={styles.post}>
-                        
+
 
                     <div
                          onClick={

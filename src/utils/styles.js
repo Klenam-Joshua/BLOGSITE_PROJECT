@@ -18,7 +18,7 @@ export const Styles = [
     {
         styleName: "fontStyle",
         styleIcon: boldIcon,
-        style: { fontStyle: "bolder" },
+        style: { fontWeight: "bolder" },
     },
 
     {
@@ -43,6 +43,7 @@ export const Styles = [
     {
         styleName: "fontSize",
         styleIcon: fontSize,
+        open: false,
         options: [
             {
                 fontSizeName: "16px",
@@ -62,7 +63,7 @@ export const Styles = [
     {
         styleName: "fontFamily",
         styleIcon: fontFamily,
-
+        open: false,
         options: [
             {
                 fontFamilyName: "arial",

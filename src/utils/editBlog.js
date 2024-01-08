@@ -10,3 +10,8 @@
 // 
 import { Styles } from "./styles";
 
+function editBlog() {
+    const applyStyle = (selectedElements, style) => {
+
+    }
+}

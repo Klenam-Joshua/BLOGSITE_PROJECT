@@ -1,12 +1,57 @@
-.styles_wrapper {
-    display: flex;
-    gap: 2rem;
-    font-size: 2rem;
-}
+.styles_wrapper {}
 
-.styles_wrapper>span {
+/* 
+.styles_wrapper>div,
+.styles_wrapper span {
     font-weight: normal;
     color: #546e7a;
     cursor: pointer;
     display: inline-block
+}
+
+.styles_wrapper>div {
+    position: relative;
+
+} */
+
+.options_container {
+    position: absolute;
+    background: white;
+    box-shadow: 0px 0px 5px gray;
+    border-radius: 5px;
+    margin-top: 0.5rem;
+    padding: 2rem 0;
+
+}
+
+.options_container p {
+    font-size: 1.5rem;
+    color: black;
+    text-wrap: nowrap;
+    padding: 1rem 2rem;
+
+}
+
+.options_container p:hover {
+    background-color: #f0f5f8;
+}
+
+.fontFamily {
+    margin-left: 1rem;
+    width: fit-content;
+    height: 30vh;
+
+    left: 1rem
+}
+
+
+
+.fontSize {
+    height: 30vh;
+    left: -5rem;
+    margin-left: 0 !important;
+}
+
+.options_container:nth-child(1) {
+    display: none;
 }

@@ -1,214 +1,191 @@
-import styles from "./CreatePost.module.css"
+import { useNavigate, useSearchParams } from "react-router-dom";
 
-
-import MainSection from "../../Components/MainSection/MainSection"
+import MainSection from "../../Components/MainSection/MainSection";
 import MessageModal from "../../Components/MessageModal/MessageModal";
 import LoadingAnim from "../../Components/LoadingAnim/LoadingAnim";
 import StylesBar from "./stylesBar";
+import styles from "./CreatePost.module.css";
+import toast, { Toaster } from "react-hot-toast";
 
-import DOMPurify from "dompurify";
-
-//icons 
+//icons
 import { FaImage } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
-
 
 // ========= context ======
 import { useAuthContext } from "../../Hooks/useAuthContext";
 import { useCreate } from "../../Hooks/useCreatePost";
 import ImagesModal from "../../Components/ImagesModal/ImagesModal";
 
+//========== custom hooks ========
 
-
-
+import { useTrackHighlightedEl } from "../../Hooks/useTrackHighlightedEl";
+import { useCollection } from "../../Hooks/useCollection";
+import toast from "react-hot-toast";
 
 const CreatePost = () => {
-  const [imageUrl, setImageUrl] = useState(null);
+  const { highlightedElements, setNewStyle } = useTrackHighlightedEl();
+
   const [postTitle, setPostTitle] = useState("");
   const { user } = useAuthContext();
-  const postRef = useRef();
-
+  const editorRef = useRef(null);
   const [postContent, setPostContent] = useState(null);
-  const { createPost, success, setSuccess, isLoading, handleUploadImage } = useCreate("posts")
+  const {
+    posts,
+    fetchData,
+    isLoading: loading,
+    error,
+  } = useCollection("posts", [""], true);
+
+  const { createPost, success, setSuccess, isLoading, handleUploadImage } =
+    useCreate("posts");
 
   const [openImagesModal, setOpenImagesModal] = useState(false);
+  const navigate = useNavigate();
 
+  const [queryParameters] = useSearchParams();
+  let postId = queryParameters.get("id");
 
-  const handleInsertSelectedImages = (images) => {
-    let currentImages = images.map((imageUrl) => {
-      return `<img src=${imageUrl} alt='posturl' />  <br/>`
-
-    })
-    postRef.current.innerHTML += DOMPurify.sanitize(currentImages)
-    //setPostContent(prev => prev + currentImages)
-
-  }
-
+  const handleUpdate = () => {};
   const handleOpenImagesModal = () => {
     setOpenImagesModal(true);
-    //console.log("hello")
-  }
+  };
 
   const handleCloseImagesModal = () => {
-    setOpenImagesModal(false)
-  }
+    setOpenImagesModal(false);
+  };
 
-  const handleSubmit = (e) => {
-
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // setPostContent(post.current.innerHTML)
-
+    let postcontent =
+      editorRef.current.getEditor().container.children[0].innerHTML;
 
     const doc = {
       authorName: user.email.split()[0],
       author_id: user.uid,
-      content: postContent,
-      postTitle: postTitle
-
-    }
-
-    // createPost(doc, imageUrl)
-
-
-  }
+      content: postcontent,
+      postTitle: postTitle,
+    };
+    await createPost(doc);
+    navigate("/");
+  };
 
   useEffect(() => {
     let timeout = null;
     if (success) {
       const timeout = setTimeout(() => {
-        setSuccess(false)
-      }, 3000)
+        setSuccess(false);
+      }, 3000);
     }
 
+    return () => {
+      if (timeout) clearTimeout(timeout);
+    };
+  }, [success]);
 
-    return () => { if (timeout) clearTimeout(timeout) }
-  }, [success])
-
-
+  useEffect(() => {
+    fetchData(postId);
+    if (posts) {
+      let editorCon = editorRef.current.getEditor().container.children[0];
+      editorCon.innerHTML = posts?.content;
+      setPostTitle(posts?.postTitle);
+    }
+  }, [posts?.authorName]);
   return (
     <MainSection needNotHeader={true}>
-
-      <div
-
-        className={styles.post_form_container}>
-
-        <form encType="multipart/form-data" onSubmit={handleSubmit}>
-
+      <div className={styles.post_form_container}>
+        <form onSubmit={(e) => e.preventDefault()}>
           <div className={styles.title_bar_wrapper}>
-            {
-              success
-              &&
-
-              <p style={{ color: "green", textAlign: "center", fontSize: "1.4rem" }}>
+            {success && (
+              <p
+                style={{
+                  color: "green",
+                  textAlign: "center",
+                  fontSize: "1.4rem",
+                }}
+              >
                 post created successful
               </p>
-            }
-            <div className={styles.wrapper}>
-
-              {/*checks if submit is successful  */}
-
-
+            )}
+            <div
+              className={styles.wrapper}
+              style={{ display: "flex", justifyContent: "space-between" }}
+            >
               <div className={styles.title_field_con}>
                 <input
-                  onChange={e => setPostTitle(e.target.value)}
-                  type="text" id="postTitle" placeholder="title" required />
+                  onChange={(e) => setPostTitle(e.target.value)}
+                  type="text"
+                  id="postTitle"
+                  placeholder="title"
+                  value={postTitle}
+                  required
+                />
               </div>
 
-              <div className={styles.editor_controls_con}>
-
-                <StylesBar >
-                  <span
-                    onClick={handleOpenImagesModal}
-                    className="text-center">
-                    <FaImage />
-                  </span>
-                </StylesBar >
-                {/* <div className={styles.file_selector_con}>
-                  <span
-                    onClick={handleOpenImagesModal}
-                    className="text-center">
-                    <FaImage />
-                  </span> */}
-                {/* <input
-                  onChange={e => setImageUrl(e.target.files[0])}
-                  style={{ display: "none" }} type="file" id="file_selector" multiple /> */}
-                {/* </div> */}
-              </div>
-
-              {/* <button type="submit">
-                Publish Post
-              </button> */}
+              {postId ? (
+                <button disabled={isLoading ? true : false} type="button">
+                  Update
+                </button>
+              ) : (
+                <button
+                  onClick={handleSubmit}
+                  disabled={isLoading ? true : false}
+                  type="button"
+                >
+                  Publish
+                </button>
+              )}
             </div>
           </div>
-
 
           <div className={styles.textarea_con}>
-
-            <div ref={postRef}
-              ///+++++
-              onKeyDown={(e) => {
-                console.log("run this code")
-                let emptyString = "  "
-                if (!e.target.innerHTML) {
-                  e.target.innerHTML = e.target.innerHTML + `<h1> &nbsp </h1>`
-                  console.log("hi hi")
-                  console.log(e.target.innerHTML)
-                }
-                else {
-
-                }
-              }}
-              onInput={e => {
-                setPostContent(e.currentTarget.innerHTML)
-
-              }}
-
-              contentEditable={true}
-
-              // dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(postContent) }}
-              suppressContentEditableWarning={true}
-              onMouseUp={(e) => {
-                console.log(window.getSelection().getRangeAt(0).commonAncestorContainer.parentNode)
-                //console.log(window.getSelection().getRangeAt(1).commonAncestorContainer.parentNode)
-
-              }}
-
-              className={styles.textbox}
-
+            <StylesBar
+              editorRef={editorRef}
+              highlightedElements={highlightedElements}
+              setNewStyle={setNewStyle}
             >
-
-
-            </div>
+              <div className={styles.file_selector_con}>
+                <span onClick={handleOpenImagesModal} className="text-center">
+                  <FaImage />
+                </span>
+                <input
+                  onChange={(e) => setImageUrl(e.target.files[0])}
+                  style={{ display: "none" }}
+                  type="file"
+                  id="file_selector"
+                  multiple
+                />
+              </div>
+            </StylesBar>
           </div>
-
         </form>
       </div>
 
-      {
-        isLoading &&
-        <MessageModal message={"post created successfully"} title_message={"creating post ..."} icon={<LoadingAnim />} />
+      {isLoading && (
+        <MessageModal
+          message={"Creating post..."}
+          title_message={"PENDING"}
+          icon={<LoadingAnim className={styles.loadingAnim} />}
+        />
+      )}
+      {success && (
+        <MessageModal
+          message={"Post created successfully"}
+          title_message={"SUCCESS"}
+          icon={<IoIosCheckmarkCircleOutline />}
+        />
+      )}
 
-      }
-      {
-        success
-        &&
-        <MessageModal message={"post created successfully"} title_message={"SUCCESS"} icon={<IoIosCheckmarkCircleOutline />} />
-
-      }
-
-      {
-
-        openImagesModal &&
+      {openImagesModal && (
         <ImagesModal
-          postRef={postRef}
-
+          editorRef={editorRef}
           setPostContent={setPostContent}
-          handleInsertSelectedImages={handleInsertSelectedImages}
-          handleCloseImagesModal={handleCloseImagesModal} />
-      }
+          handleCloseImagesModal={handleCloseImagesModal}
+        />
+      )}
+      <Toaster />
     </MainSection>
-  )
-}
+  );
+};
 
-export default CreatePost
+export default CreatePost;
