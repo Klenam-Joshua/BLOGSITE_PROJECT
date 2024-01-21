@@ -1,0 +1,33 @@
+.preview_modal_container {
+  padding: 1.7rem 0;
+  padding-bottom: 2rem;
+
+  background-color: white;
+  position: absolute;
+  box-shadow: 0 0 8px #546e7a;
+  min-height: 10rem;
+  min-width: 20rem;
+  z-index: 999999;
+  top: calc(100% + 1rem);
+}
+
+.preview_modal_container ul {
+  list-style: none;
+  color: #546e7a;
+}
+
+.preview_modal_container ul li {
+  padding: 1.1rem 2.5rem;
+}
+
+.preview_modal_container ul li span:nth-child(1) {
+  font-size: 1.7rem;
+}
+
+.preview_modal_container ul li:hover {
+  background: var(--bg-main);
+}
+.preview_modal_container ul li span:nth-child(2) {
+  font-size: 1.4rem;
+  padding-bottom: 20px;
+}

@@ -17,7 +17,7 @@ import MenuList from "../MenuList/MenuList";
 
 //===================== custom Hooks ==========
 import { useSettinsContext } from "../../Hooks/useSettingsContext";
-
+import { useAuthContext } from "../../Hooks/useAuthContext";
 const Sidebar = ({ children }) => {
   const { dispatch, sidebarIsOpen } = useSettinsContext();
 

@@ -1,0 +1,10 @@
+.label_module_container {
+  height: 85%;
+  padding: 1rem;
+  min-width: 30rem;
+  position: absolute;
+  background-color: rgb(253, 253, 253);
+  right: 0;
+  top: 15%;
+  box-shadow: -2px 2px 16px rgb(230, 227, 227);
+}

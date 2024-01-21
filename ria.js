@@ -5,8 +5,17 @@
 //     return false;
 //   }
 
+// let arr = [3, 4, 5, 6, 77]
+// let stringArray = arr.toString()
+// console.log(stringArray.split(",").join(""))
 
+let number = 20;
+function runCode() {
+  if (number === 20) {
+    console.log("it matches");
+  }
 
-let arr = [3, 4, 5, 6, 77]
-let stringArray = arr.toString()
-console.log(stringArray.split(",").join(""))
+  console.log("it still works here like that");
+}
+
+runCode();

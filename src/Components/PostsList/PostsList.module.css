@@ -1,76 +1,76 @@
 .post {
-    display: flex;
-    justify-content: space-between;
-    background: white;
-    margin-top: 2rem;
-    padding: 1rem 2.2rem;
-    border: 1px solid rgb(216, 211, 211);
-    border-radius: 5px;
-    cursor: pointer;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+  background: white;
+  margin-top: 2rem;
+  height: 10rem;
+  padding: 1rem 2.2rem;
+  border: 1px solid rgb(216, 211, 211);
+  border-radius: 5px;
+
+  flex-wrap: wrap;
 }
 
 .postIcon {
-    font-size: 3rem;
-    font-weight: 700;
-    border: 1px solid;
-    padding: 1rem 1.6rem;
+  font-size: 3rem;
+  font-weight: 700;
+  border: 1px solid;
+  padding: 1rem 1.6rem;
 }
 
 .post:hover {
-    border: none;
-    box-shadow: 0 0 10px rgb(179, 178, 178);
+  border-color: transparent;
+  box-shadow: 0 0 10px rgb(179, 178, 178);
 }
 
 .post .blog_details {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  cursor: pointer;
 }
 
 .imageWrapper img {
-    width: 4rem;
-    height: 4rem;
-    ;
+  width: 4rem;
+  height: 4rem;
 }
 
 .blog_title_date h2 {
-    margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .blog_title_date p {
-    font-size: 1.3rem;
+  font-size: 1.3rem;
 }
 
-
 .author_details .author_profile {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
 .author_details .author_profile img {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
 }
 
 .blog_stats {
-    display: flex;
-    justify-content: center;
-    gap: 2rem
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
 }
 
 .blog_stats div span {
-    font-size: 1.4rem;
+  font-size: 1.4rem;
 }
 
 .counts {
-    margin-right: 1rem;
-    margin-bottom: 1rem;
-    display: inline-block;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  display: inline-block;
 }
 
 .deleteIcon {
-    font-size: 2rem;
+  font-size: 2rem;
 }

@@ -1,81 +1,99 @@
 .post_form_container {
-    width: 100%;
-    padding-top: 0 !important;
-
-
-    margin-top: 0 !important;
+  width: 100%;
+  padding-top: 0 !important;
+  position: relative;
+  margin-top: 0 !important;
 }
 
 .title_field_con {
-    width: 50%;
-    ;
+  width: 50%;
 }
 
 .title_field_con input {
-    background: transparent;
-    border-bottom: 1px solid #bfbbbb;
-    width: 100%;
+  background: transparent;
+  border-bottom: 1px solid #bfbbbb;
+  width: 100%;
 }
 
 .title_bar_wrapper {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    background-color: white;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  background-color: white;
 }
 
 .wrapper {
-
-    width: 90%;
-    margin: auto;
+  width: 90%;
+  margin: auto;
 }
 
 .wrapper button {
-    width: fit-content;
-    padding: 1.5rem 4rem;
-    border-radius: 0;
+  width: fit-content;
+  padding: 1.2rem 3rem;
+  border-radius: 0;
+  margin: 0;
+}
+.preview_btn_container {
+  background: white;
+  border: 1px solid rgb(167, 167, 167);
+  display: flex;
+  align-items: center;
+  padding-top: 0;
+  position: relative;
+}
+.preview_btn_container button {
+  background-color: white;
+  padding-inline: 2rem;
+  border-right: 1px solid rgb(118, 116, 116);
+  margin: 0;
+  color: #546e7a;
+}
+
+.preview_btn_container button span {
+  padding-top: 3px;
+}
+.preview_btn_container span {
+  text-align: center;
+  padding-inline: 1rem;
+  cursor: pointer;
 }
 
 .textarea_con {
-
-    background: white;
-    width: 85%;
-    margin: auto;
-    margin-top: 3rem;
-    padding-inline: 1rem;
+  background: white;
+  width: 85%;
+  margin: auto;
+  margin-top: 3rem;
+  padding-inline: 1rem;
 }
 
-
-
 .textbox {
-    height: 70vh;
-    outline: none;
-    resize: none;
-    border: none;
-    border-color: #bfbbbb;
-    padding: 1rem 4rem;
-    overflow: auto;
-    margin: auto;
-    font-size: 2rem;
+  height: 70vh;
+  outline: none;
+  resize: none;
+  border: none;
+  border-color: #bfbbbb;
+  padding: 1rem 4rem;
+  overflow: auto;
+  margin: auto;
+  font-size: 2rem;
 }
 
 .file_selector_con {
-    padding-left: 3rem;
-    padding-top: 1.5rem;
+  padding-left: 3rem;
+  padding-top: 1.5rem;
 }
 
 .file_selector_con span {
-    font-size: 2rem;
-    padding-top: 2rem;
-    color: #322d2d;
-    cursor: pointer;
-
+  font-size: 2rem;
+  padding-top: 2rem;
+  color: #322d2d;
+  cursor: pointer;
 }
 
 .editor_controls_con {
-    margin-top: 3rem;
+  margin-top: 3rem;
 }
 
 .loadingAnim {
-    border: 0.2vw solid blue;
-    border-top-color: transparent;
+  border: 0.2vw solid blue;
+  border-top-color: transparent;
 }

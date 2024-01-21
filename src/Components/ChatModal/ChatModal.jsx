@@ -3,37 +3,32 @@ import { IoClose } from "react-icons/io5";
 import styles from "./ChatModal.module.css";
 
 const ChatModal = ({ class_name, handleCloseChat }) => {
+  const handleClose = (e) => {
+    e.stopPropagation();
 
+    handleCloseChat();
+  };
+  return (
+    <div
+      onClick={(e) => handleClose(e)}
+      className={
+        class_name
+          ? `${styles.chat_modal_container} ${styles.show_chat_modal_container}`
+          : styles.chat_modal_container
+      }
+    >
+      <div onClick={(e) => e.stopPropagation()} className={styles.chat_modal}>
+        <div className={styles.active_chat_top}>
+          <div className={styles.active_receiver_details}>
+            <img src={""} alt="receiver_avatar" />
+          </div>
+          <span onClick={handleCloseChat} className={styles.cancel}>
+            <IoClose />
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-        const handleClose = (e) => {
-
-                e.stopPropagation();
-
-                handleCloseChat();
-
-        }
-        return (
-                <div
-                        onClick={(e) => handleClose(e)}
-                        className={class_name ? `${styles.chat_modal_container} ${styles.show_chat_modal_container}` : styles.chat_modal_container}>
-
-                        <div className={styles.chat_modal}>
-                                <div className={styles.active_chat_top}>
-                                        <div className={styles.active_receiver_details}>
-                                                <img src={""} alt="receiver_avatar" />
-                                        </div>
-                                        <span
-                                                onClick={handleCloseChat}
-                                                className={styles.cancel}>
-                                                <IoClose />
-                                        </span>
-                                </div>
-
-                        </div>
-                </div>
-
-
-        )
-}
-
-export default ChatModal
+export default ChatModal;

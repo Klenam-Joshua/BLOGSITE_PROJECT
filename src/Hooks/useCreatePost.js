@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import { projectAuth } from "../firebase/firebase";
+
 import { projectStorage } from "../firebase/firebase";
 import { projectFirestore } from "../firebase/firebase";
 import { Timestamp } from "../firebase/firebase";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
-export const useCreate = (collection, method = "GET") => {
+export const useCreate = (collection) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [isCancelled, setIsCancelled] = useState(false);
 
   const ref = projectFirestore.collection(collection);
@@ -18,14 +19,13 @@ export const useCreate = (collection, method = "GET") => {
     setError(null);
     let createdAt = Timestamp.fromDate(new Date());
     try {
-      let resp = await ref.add({ ...doc, createdAt });
+      await ref.add({ ...doc, createdAt });
       setIsLoading(false);
       setSuccess(true);
     } catch (error) {
       setError(error.message);
       setIsLoading(false);
       setSuccess(false);
-      console.log(error, "from error");
     }
   };
 
@@ -99,14 +99,18 @@ export const useCreate = (collection, method = "GET") => {
     }
   };
 
-  const updatePost = async () => {
+  const updatePost = async (id, updatedObject) => {
     try {
-      let updatedDoc = await projectFirestore
+      await projectFirestore
         .collection(collection)
         .doc(id)
         .update(updatedObject);
       toast.success("post updated successfully");
-    } catch (error) {}
+    } catch (error) {
+      toast.error(
+        "Oops! there was an error handling your request please try gain"
+      );
+    }
   };
 
   useEffect(() => {
@@ -125,5 +129,6 @@ export const useCreate = (collection, method = "GET") => {
     setSuccess,
     uploadImages,
     handleUploadImage,
+    updatePost,
   };
 };

@@ -1,60 +1,56 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Poppins:wght@200;300&family=Red+Hat+Display:wght@300&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Poppins:wght@200;300&family=Red+Hat+Display:wght@300&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100&display=swap");
 
 :root {
-    --font-red-hat: 'Red Hat Display', sans-serif;
-    --font-poppins: 'Poppins', sans-serif;
-    --font-roboto: 'Roboto', sans-serif;
+  --font-red-hat: "Red Hat Display", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+  --font-roboto: "Roboto", sans-serif;
 
-    --bg-main: #f0f5f8;
-    --sidebar-color: #0b212a;
-    --sidebar-link-hover: #273240;
+  --bg-main: #f0f5f8;
+  --sidebar-color: #0b212a;
+  --sidebar-link-hover: #273240;
 }
 
 html {
-    font-size: 65%;
-    background-color: var(--bg-main);
-    font-family: var(--font-poppins);
-    height: 100%;
-    zoom: 100%;
+  font-size: 65%;
+  background-color: var(--bg-main);
+  font-family: var(--font-poppins);
+  height: 100%;
+  zoom: 100%;
 }
 
 :fullscreen html {
-    background: var(--bg-main)
+  background: var(--bg-main);
 }
 
 body {
-    background: var(--bg-main)
+  background: var(--bg-main);
 }
 
 body,
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-
-
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    height: 100%;
+  height: 100%;
 }
 
 .quill {
-    width: 100%;
-    display: grid !important;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
+  width: 100%;
+  display: grid !important;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
 }
 
-
-.quill>div:nth-child(1) {
-    border: none !important;
-    margin-bottom: 2rem !important;
+.quill > div:nth-child(1) {
+  border: none !important;
+  margin-bottom: 2rem !important;
 }
 
-.quill>div:nth-child(2) {
-    height: 40rem;
-    ;
+.quill > div:nth-child(2) {
+  height: 40rem;
 }
 
 /* ================================
@@ -62,71 +58,72 @@ body {
 */
 
 #root {
-    height: 100%;
+  height: 100%;
 }
 
 .row {
-    display: flex;
+  display: flex;
 }
 
 .justify-between {
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 .justify-start {
-    justify-content: flex-start;
+  justify-content: flex-start;
 }
 
 .justify-end {
-    justify-content: flex-end;
+  justify-content: flex-end;
 }
 
 .justify-center {
-    justify-content: center;
+  justify-content: center;
 }
 
 .flex-dir-column {
-    flex-direction: column;
+  flex-direction: column;
 }
 
 .flex_row_reverse {
-    flex-direction: row-reverse;
+  flex-direction: row-reverse;
 }
 
 .align-center {
-    align-items: center;
+  align-items: center;
 }
-
 
 /* ============ TEXT ALIGNMENT */
 
-
-
 .text-light {
-    color: var(--vLightGray);
+  color: var(--vLightGray);
 }
 
 .text-red {
-    color: red;
+  color: red;
 }
 
 .text_line-through {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
 
 /* text alignment */
 .text_align_justify {
-    text-align: justify;
+  text-align: justify;
 }
 
 .text-center {
-    text-align: center;
+  text-align: center;
 }
 
 .text-right {
-    text-align: right;
+  text-align: right;
 }
-
+.ql-container,
+.ql-snow,
+.ql-editor {
+  overflow: auto;
+}
 /* 
 .view{
     left:-270px ;
@@ -135,39 +132,29 @@ body {
 
 /*  responsive */
 
-
-
 /* ----------- animations -------------- */
 .dim {
-    animation: dim 1.5s 0.5s infinite linear;
+  animation: dim 1.5s 0.5s infinite linear;
 }
-
 
 @keyframes dim {
-    0% {
-        transform: scale(0.8, 0.8);
-
-    }
-
+  0% {
+    transform: scale(0.8, 0.8);
+  }
 }
 
-@media (max-width:808px) {
-    aside {
+@media (max-width: 808px) {
+  aside {
+    left: -270px;
+  }
 
-        left: -270px;
+  #navbar__menuIcon {
+    display: inline-block;
+  }
 
-
-    }
-
-
-    #navbar__menuIcon {
-        display: inline-block;
-    }
-
-    header,
-    #main_container {
-        width: 100%;
-        margin-left: 0;
-
-    }
+  header,
+  #main_container {
+    width: 100%;
+    margin-left: 0;
+  }
 }

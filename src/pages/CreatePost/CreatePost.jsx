@@ -5,23 +5,31 @@ import MessageModal from "../../Components/MessageModal/MessageModal";
 import LoadingAnim from "../../Components/LoadingAnim/LoadingAnim";
 import StylesBar from "./stylesBar";
 import styles from "./CreatePost.module.css";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
+import PreviewModal from "./PreviewModal/PreviewModal";
 
 //icons
 import { FaImage } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 
+import { FaArrowCircleLeft } from "react-icons/fa";
+import { FaArrowAltCircleRight } from "react-icons/fa";
+
 // ========= context ======
 import { useAuthContext } from "../../Hooks/useAuthContext";
 import { useCreate } from "../../Hooks/useCreatePost";
 import ImagesModal from "../../Components/ImagesModal/ImagesModal";
+import LabelsSideBar from "../../Components/LablesSideBar/LabelsSideBar";
 
 //========== custom hooks ========
 
 import { useTrackHighlightedEl } from "../../Hooks/useTrackHighlightedEl";
 import { useCollection } from "../../Hooks/useCollection";
-import toast from "react-hot-toast";
+import { FaChevronDown, FaEye } from "react-icons/fa6";
+import { useDismissModal } from "../../Hooks/useDismiss";
+
+// import toast from "react-hot-toast";
 
 const CreatePost = () => {
   const { highlightedElements, setNewStyle } = useTrackHighlightedEl();
@@ -29,16 +37,26 @@ const CreatePost = () => {
   const [postTitle, setPostTitle] = useState("");
   const { user } = useAuthContext();
   const editorRef = useRef(null);
-  const [postContent, setPostContent] = useState(null);
-  const {
-    posts,
-    fetchData,
-    isLoading: loading,
-    error,
-  } = useCollection("posts", [""], true);
+  const [setPostContent] = useState(null);
+  const [openLabelModal, setOpenLabelModal] = useState(false);
+  const [openPreviewModal, setOpenPreviewModal] = useState();
 
-  const { createPost, success, setSuccess, isLoading, handleUploadImage } =
-    useCreate("posts");
+  const { posts, fetchData } = useCollection("posts", [""], true);
+
+  const [openMessageModal, setOpenMessageModal] = useState(false);
+  const handleCloseMessagesModal = () => {
+    setOpenMessageModal(false);
+  };
+  useDismissModal(openMessageModal, handleCloseMessagesModal);
+
+  const {
+    createPost,
+    success,
+    setSuccess,
+    isLoading,
+
+    updatePost,
+  } = useCreate("posts");
 
   const [openImagesModal, setOpenImagesModal] = useState(false);
   const navigate = useNavigate();
@@ -46,13 +64,22 @@ const CreatePost = () => {
   const [queryParameters] = useSearchParams();
   let postId = queryParameters.get("id");
 
-  const handleUpdate = () => {};
+  const handleUpdate = (id) => {
+    let postcontent =
+      editorRef.current.getEditor().container.children[0].innerHTML;
+    updatePost(id, { content: postcontent, postTitle: postTitle });
+  };
+
   const handleOpenImagesModal = () => {
     setOpenImagesModal(true);
   };
 
   const handleCloseImagesModal = () => {
     setOpenImagesModal(false);
+  };
+
+  const handleOpenLabelsModal = () => {
+    setOpenLabelModal((prev) => !prev);
   };
 
   const handleSubmit = async (e) => {
@@ -65,6 +92,7 @@ const CreatePost = () => {
       author_id: user.uid,
       content: postcontent,
       postTitle: postTitle,
+      status: "Published",
     };
     await createPost(doc);
     navigate("/");
@@ -73,7 +101,7 @@ const CreatePost = () => {
   useEffect(() => {
     let timeout = null;
     if (success) {
-      const timeout = setTimeout(() => {
+      timeout = setTimeout(() => {
         setSuccess(false);
       }, 3000);
     }
@@ -121,20 +149,69 @@ const CreatePost = () => {
                   required
                 />
               </div>
+              <div
+                style={{
+                  flexBasis: "60%",
+                  display: "flex",
+                  justifyContent: "right",
+                  alignItems: "center",
+                  gap: "1rem",
+                }}
+              >
+                <div className={styles.preview_btn_container}>
+                  <button type="button">
+                    <span>
+                      <FaEye />
+                    </span>
+                    Preview
+                  </button>
+                  <span onClick={() => setOpenPreviewModal((prev) => !prev)}>
+                    <FaChevronDown />
+                  </span>
+                  {openPreviewModal && (
+                    <PreviewModal
+                      editorRef={editorRef}
+                      post={{
+                        authorName: user.email.split()[0],
+                        author_id: user.uid,
 
-              {postId ? (
-                <button disabled={isLoading ? true : false} type="button">
-                  Update
-                </button>
-              ) : (
-                <button
-                  onClick={handleSubmit}
-                  disabled={isLoading ? true : false}
-                  type="button"
+                        postTitle: postTitle,
+                      }}
+                    />
+                  )}
+                </div>
+                {postId ? (
+                  <button
+                    onClick={() => handleUpdate(postId)}
+                    disabled={isLoading ? true : false}
+                    type="button"
+                  >
+                    Update
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleSubmit}
+                    disabled={isLoading ? true : false}
+                    type="button"
+                  >
+                    Publish
+                  </button>
+                )}
+                <span
+                  onClick={handleOpenLabelsModal}
+                  style={{
+                    fontSize: "2rem",
+                    paddingLeft: "2rem",
+                    cursor: "pointer",
+                  }}
                 >
-                  Publish
-                </button>
-              )}
+                  {openLabelModal ? (
+                    <FaArrowAltCircleRight />
+                  ) : (
+                    <FaArrowCircleLeft />
+                  )}
+                </span>
+              </div>
             </div>
           </div>
 
@@ -149,7 +226,6 @@ const CreatePost = () => {
                   <FaImage />
                 </span>
                 <input
-                  onChange={(e) => setImageUrl(e.target.files[0])}
                   style={{ display: "none" }}
                   type="file"
                   id="file_selector"
@@ -159,6 +235,7 @@ const CreatePost = () => {
             </StylesBar>
           </div>
         </form>
+        {openLabelModal && <LabelsSideBar />}
       </div>
 
       {isLoading && (

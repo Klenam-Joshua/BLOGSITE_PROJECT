@@ -42,13 +42,13 @@ export const useCollection = (collection, orderBy, fetchSingle) => {
           });
 
           setPosts(articles);
-          setCopiedPosts(articles);
 
           setIsLoading(false);
         },
         (error) => {
           setError(error.message);
-          console.log(error);
+
+          toast.error("there was an error fetching your post");
           setIsLoading(false);
         }
       );
